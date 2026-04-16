@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  course-platform:
+    build:
+      context: ./courses/adversary-hunting
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    networks:
+      - moonbase-network
+
+networks:
+  moonbase-network:
+    driver: bridge

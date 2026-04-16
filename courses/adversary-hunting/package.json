@@ -1,0 +1,22 @@
+{
+  "name": "adversary-hunting",
+  "version": "1.0.0",
+  "description": "This course provides a structured, academic-level learning experience for cybersecurity professionals.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@astrojs/check": "^0.9.8",
+    "astro": "^6.1.5",
+    "typescript": "^5.9.3"
+  }
+}

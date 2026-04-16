@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DCO 550 Presentation - Session 1.1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Rajdhani:wght@500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/slides.css">
+    <style>
+        .nav-controls {
+            position: fixed;
+            top: 20px;
+            right: 40px;
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.9);
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid #22c55e;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);
+        }
+        .nav-btn {
+            background: none;
+            border: none;
+            color: #22c55e;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        .nav-btn:hover { transform: scale(1.2); }
+        .slide-container { display: none; }
+        .slide-container.active { display: flex; }
+    </style>
+</head>
+<body>
+    <div class="nav-controls">
+        <button class="nav-btn" id="prevBtn"><i class="fa-solid fa-circle-arrow-left"></i></button>
+        <span id="slideNum" style="font-family: 'Share Tech Mono', monospace; color: #f8fafc; align-self: center;">1 / 7</span>
+        <button class="nav-btn" id="nextBtn"><i class="fa-solid fa-circle-arrow-right"></i></button>
+    </div>
+
+    <!-- Slide 1: Title_Slide -->
+    <div class="slide-container active" id="slide1">
+        <div class="title-layout">
+            <div class="course-id">DCO 550 // CAPSTONE</div>
+            <h1>Advanced <span class="accent">Adversary Hunting</span><br>& Malware RE</h1>
+            <p class="subtitle">Session 1.1: Introduction & The Modern Hunter's Triad</p>
+            <div class="instructor">Instructor: Iver Iverson / Sentar Contractor</div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Course Overview -->
+    <div class="slide-container" id="slide2">
+        <h2 class="slide-title">Course <span>Overview</span></h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <ul>
+                        <li><strong>Welcome to DCO 550.</strong> This is the capstone course for the proactive, data-driven cyber defender.</li>
+                        <li><strong>Prerequisite Mastery:</strong> We assume you have mastered the concepts from <strong>DCO 450 (Cyber Defense Hunt Analyst)</strong>. We will not be reviewing foundational topics.</li>
+                        <li><strong>Our Focus:</strong> To find hidden, sophisticated adversaries by uniting deep forensic investigation, malware analysis, and the power of data science.</li>
+                    </ul>
+                    <div class="callout-box">
+                        <p>This course is built on an <strong>integrated, three-pronged methodology</strong>, which we will call the "Modern Hunter's Triad."</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1551808525-51a94da548ce?auto=format&fit=crop&w=800&q=80" alt="Cyber security dashboard triage analyst">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: The Modern Hunter's Triad -->
+    <div class="slide-container" id="slide3">
+        <h2 class="slide-title">The Modern Hunter's <span>Triad</span></h2>
+        <div class="content-area">
+            <p style="margin-top: 10px; margin-bottom: 25px; width: 100%;">To be effective at scale, a hunter must master three interconnected domains:</p>
+            <div class="tiled-content">
+                <div class="tile tile-green">
+                    <div class="icon"><i class="fa-solid fa-file-shield"></i></div>
+                    <h3>1. Deep Forensic Hunting</h3>
+                    <p style="font-family: 'Share Tech Mono', monospace; color: #4ade80;">The "Where"</p>
+                    <p><strong>What it is:</strong> Using deep forensic artifacts to find adversary TTPs.</p>
+                    <p><strong>Techniques:</strong> Memory Forensics, Filesystem Forensics, Super Timeline Analysis.</p>
+                    <p><strong>Goal:</strong> Pinpoint where the adversary has been and what they have done on a system.</p>
+                </div>
+                <div class="tile tile-blue">
+                    <div class="icon"><i class="fa-solid fa-code"></i></div>
+                    <h3>2. Malware Reverse Engineering</h3>
+                    <p style="font-family: 'Share Tech Mono', monospace; color: #60a5fa;">The "How"</p>
+                    <p><strong>What it is:</strong> The systematic deconstruction of malicious software to understand its full capabilities.</p>
+                    <p><strong>Techniques:</strong> Static Analysis (Ghidra), Dynamic Analysis (x64dbg).</p>
+                    <p><strong>Goal:</strong> Understand the adversary's tools and how they work.</p>
+                </div>
+                <div class="tile tile-yellow">
+                    <div class="icon"><i class="fa-solid fa-network-wired"></i></div>
+                    <h3>3. Data Science & Automation</h3>
+                    <p style="font-family: 'Share Tech Mono', monospace; color: #facc15;">The "Scale"</p>
+                    <p><strong>What it is:</strong> Applying programmatic and statistical methods to security data.</p>
+                    <p><strong>Techniques:</strong> ETL Pipelines (Python/Pandas), Anomaly Detection (Statistics), ML Modeling.</p>
+                    <p><strong>Goal:</strong> Scale the hunt from one machine to the entire enterprise and automate detection.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Data-Driven Feedback Loop -->
+    <div class="slide-container" id="slide4">
+        <h2 class="slide-title">Why All Three? <span>The Data-Driven Feedback Loop</span></h2>
+        <div class="content-area">
+            <p style="margin-top: 10px; margin-bottom: 15px; font-style: italic; text-align: left; width: 100%;">These are not separate disciplines; they are a powerful, cyclical process. Manual hunting finds an artifact; data science scales the search.</p>
+            
+            <div class="two-column" style="gap: 30px; align-items: center;">
+                <div style="font-size: 16px;">
+                    <p style="color: #f8fafc; font-weight: bold; margin-bottom: 10px;">The Loop, Upgraded:</p>
+                    <ol style="color: #cbd5e1; padding-left: 20px; line-height: 1.5; margin-bottom: 15px; margin-top: 0;">
+                        <li style="margin-bottom: 8px;"><strong>SCALE:</strong> A <strong>Data Science</strong> model flags a statistical anomaly (e.g., unusual network traffic) on one host. This is our initial lead.</li>
+                        <li style="margin-bottom: 8px;"><strong>WHERE:</strong> A <strong>Forensic Hunt</strong> on that host investigates the anomaly, finding an unknown process running from memory and its associated file on disk.</li>
+                        <li style="margin-bottom: 8px;"><strong>HOW:</strong> <strong>Reverse Engineering</strong> analyzes the file, revealing its C2 protocol, unique file markers, and behavior. These are new, high-fidelity indicators.</li>
+                        <li style="margin-bottom: 0;"><strong>SCALE (Again):</strong> <strong>Data Science</strong> is used to build a new detection model or automated query to hunt for these <em>specific</em> indicators across the entire enterprise.</li>
+                    </ol>
+                    <div class="callout-box" style="border-left-color: #22c55e; background-color: rgba(34, 197, 94, 0.1); padding: 12px 15px; margin-top: 15px;">
+                        <p style="font-size: 14px; line-height: 1.4;">This integrated loop—<strong>Scale ➔ Where ➔ How ➔ Scale</strong>—is what separates a modern hunt team from a traditional forensics team. It directly maps to skills for GCFA, GREM, and modern Detection Engineering roles.</p>
+                    </div>
+                </div>
+                
+                <div style="display: flex; justify-content: center;">
+                    <div style="width: 360px; height: 360px; position: relative;">
+                        <div class="loop-container" style="transform: scale(0.85); transform-origin: top left; margin: 0;">
+                            <svg class="loop-svg" viewBox="0 0 450 450">
+                                <path d="M 225 65 A 160 160 0 0 1 385 225" fill="none" stroke="#475569" stroke-width="4" stroke-dasharray="8,8" />
+                                <path d="M 385 225 A 160 160 0 0 1 225 385" fill="none" stroke="#475569" stroke-width="4" stroke-dasharray="8,8" />
+                                <path d="M 225 385 A 160 160 0 0 1 65 225" fill="none" stroke="#475569" stroke-width="4" stroke-dasharray="8,8" />
+                                <path d="M 65 225 A 160 160 0 0 1 225 65" fill="none" stroke="#475569" stroke-width="4" stroke-dasharray="8,8" />
+                                <polygon points="380,140 395,150 370,160" fill="#94a3b8" transform="rotate(30, 385, 150)" />
+                                <polygon points="310,380 320,395 295,385" fill="#94a3b8" transform="rotate(-20, 310, 385)" />
+                                <polygon points="70,300 55,290 80,280" fill="#94a3b8" transform="rotate(20, 65, 290)" />
+                                <polygon points="140,70 130,55 155,65" fill="#94a3b8" transform="rotate(-30, 140, 65)" />
+                            </svg>
+                            <div class="loop-node node-top">
+                                <i class="fa-solid fa-chart-line"></i>
+                                <span>1. Scale</span>
+                            </div>
+                            <div class="loop-node node-right">
+                                <i class="fa-solid fa-search"></i>
+                                <span>2. Where</span>
+                            </div>
+                            <div class="loop-node node-bottom">
+                                <i class="fa-solid fa-code"></i>
+                                <span>3. How</span>
+                            </div>
+                            <div class="loop-node node-left">
+                                <i class="fa-solid fa-network-wired"></i>
+                                <span>4. Scale<br><small style="font-size: 10px; color: #94a3b8;">(Again)</small></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: The Power of Programmatic Analysis -->
+    <div class="slide-container" id="slide5">
+        <h2 class="slide-title">The Power of <span>Programmatic Analysis</span></h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <div class="image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=800&q=80" alt="Code pipeline data engineering">
+                    </div>
+                </div>
+                <div>
+                    <ul>
+                        <li><strong>Reinforcement:</strong> Manual hunting on one machine is a skill. Hunting across 10,000 machines is a data science problem.</li>
+                        <li>We will use Python as our force multiplier to automate and enhance our efforts by learning:
+                            <ul style="margin-top: 10px;">
+                                <li><strong>Data Engineering:</strong> We will build data pipelines to ingest, clean, and enrich terabytes of security data using Python.</li>
+                                <li><strong>Data Science & Analytics:</strong> We will apply statistical analysis and machine learning models to find anomalies and "the weird" in that data at scale.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="callout-box" style="border-left-color: #3b82f6; background-color: rgba(59, 130, 246, 0.1);">
+                        <p style="font-size: 16px;">
+                            <strong>Goal:</strong> To elevate your skills from a manual analyst to an advanced data-driven hunter.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Azure Cyber Range (Custom CSS Graphic) -->
+    <div class="slide-container" id="slide6">
+        <h2 class="slide-title">Lab Environment: <span>Your Azure Cyber Range</span></h2>
+        <div class="content-area">
+            <p style="text-align: left; width: 100%; margin-bottom: 25px;">Our lab is built in Microsoft Azure... mimicking a modern cloud/hybrid environment.</p>
+            <div class="azure-diagram">
+                <div class="azure-title"><i class="fa-solid fa-cloud"></i> DCO550-VNet</div>
+                <div class="azure-subnets">
+                    <div class="subnet-box subnet-red">
+                        <i class="fa-solid fa-cubes firewall-icon" style="color: #ef4444; font-size: 40px; text-shadow: 0 0 10px rgba(239,68,68,0.5);"></i>
+                        <div class="subnet-title">Subnet 1: dirty/RE;<br>Malware-VM</div>
+                        <div style="font-size: 10px; font-weight: bold; color: #fca5a5; text-transform: uppercase;">TREAT AS COMPROMISED</div>
+                        <div class="vm-container">
+                            <div style="display: flex; flex-direction: column; align-items: center; position: relative;">
+                                <div class="vm-icon"><i class="fa-solid fa-cube"></i><span>VM</span></div>
+                                <i class="fa-solid fa-triangle-exclamation" style="position: absolute; bottom: 15px; right: -10px; color: #f59e0b; font-size: 24px;"></i>
+                                <div style="font-size: 14px; margin-top: 8px; color: #e2e8f0;">Malware-VM</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="subnet-box subnet-green">
+                        <i class="fa-solid fa-shield-halved shield-icon"></i>
+                        <div class="subnet-title">Subnet 2: clean/DCO/<br>Analysis-VM</div>
+                        <div class="vm-container">
+                            <div style="display: flex; flex-direction: column; align-items: center;">
+                                <div class="vm-icon"><i class="fa-solid fa-cube"></i><span>VM</span></div>
+                                <div style="font-size: 14px; margin-top: 8px; color: #e2e8f0;">Analysis-VM</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="subnet-box subnet-green">
+                        <i class="fa-solid fa-shield-halved shield-icon"></i>
+                        <div class="subnet-title">Subnet 3: clean/DCO/Victim/<br>DC01 & WKSTN-01</div>
+                        <div class="vm-container">
+                            <div style="display: flex; flex-direction: column; align-items: center;">
+                                <div class="vm-icon"><i class="fa-solid fa-cube"></i><span>VM</span></div>
+                                <div style="font-size: 14px; margin-top: 8px; color: #e2e8f0;">DC01</div>
+                            </div>
+                            <div style="display: flex; flex-direction: column; align-items: center;">
+                                <div class="vm-icon"><i class="fa-solid fa-cube"></i><span>VM</span></div>
+                                <div style="font-size: 14px; margin-top: 8px; color: #e2e8f0;">WKSTN-01</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="warning-banner">
+                <i class="fa-solid fa-brain"></i>
+                <p><strong>CRITICAL WARNING:</strong> Understand that Network Security Groups (NSGs) are our safety. Do not change rules unless instructed. <strong>DEALLOCATE VMs WHEN NOT IN USE TO SAVE COST.</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: This Week's Goal & Your Mission -->
+    <div class="slide-container" id="slide7">
+        <h2 class="slide-title">This Week's Goal & <span>Your Mission</span></h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <ul>
+                        <li><strong>Mission:</strong> Fully deploy the Azure lab environment as detailed in the build guide. This is your top priority and first graded lab.</li>
+                        <li>Understand the integrated nature of Hunting, RE, and Data Science.</li>
+                        <li>Prepare for our first hunt and a deep dive into the core tools of the trade.</li>
+                    </ul>
+                    <div class="callout-box" style="border-left-color: #22c55e; background-color: rgba(34, 197, 94, 0.1); margin-top: 40px;">
+                        <p style="font-size: 16px; color: #94a3b8; text-transform: uppercase; font-weight: bold; margin-bottom: 5px;">Next Session</p>
+                        <p>We will meet the hunter's toolkit: <strong>Ghidra, Volatility, and Plaso.</strong></p>
+                    </div>
+                </div>
+                <div>
+                    <div class="image-wrapper" style="border-color: #22c55e; border-width: 2px;">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80" alt="Azure cloud architecture servers">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide-container');
+        const slideNum = document.getElementById('slideNum');
+        let currentSlide = 0;
+
+        function updateSlides() {
+            slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+            slideNum.innerText = `${currentSlide + 1} / ${slides.length}`;
+        }
+
+        document.getElementById('nextBtn').onclick = () => {
+            if (currentSlide < slides.length - 1) { currentSlide++; updateSlides(); }
+        };
+
+        document.getElementById('prevBtn').onclick = () => {
+            if (currentSlide > 0) { currentSlide--; updateSlides(); }
+        };
+
+        window.onkeydown = (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                if (currentSlide < slides.length - 1) { currentSlide++; updateSlides(); }
+            } else if (e.key === 'ArrowLeft') {
+                if (currentSlide > 0) { currentSlide--; updateSlides(); }
+            }
+        };
+
+        window.onload = updateSlides;
+    </script>
+</body>
+</html>

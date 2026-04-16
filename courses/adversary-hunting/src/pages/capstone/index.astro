@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Capstone Command Center">
+    <section class="hero">
+        <div class="container">
+            <div style="font-family: 'Share Tech Mono', monospace; color: var(--accent-blue); letter-spacing: 4px; margin-bottom: 20px;">DCO 550 // SEMESTER OBJECTIVE</div>
+            <h1>Capstone <span class="accent" style="color: var(--accent-blue);">Command Center</span></h1>
+            <p style="font-size: 20px; color: var(--text-secondary); max-width: 800px; margin: 20px auto;">
+                The definitive test of your skills. 15 weeks of hunting, reversing, and automation compressed into one final mission.
+            </p>
+        </div>
+    </section>
+
+    <section class="container" style="padding: 60px 0;">
+        <div class="card" style="border-left: 4px solid var(--accent-blue);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h2 style="margin: 0 0 10px 0;">Mission Dossier: Operation Nightfall</h2>
+                    <p style="color: var(--text-secondary);">An advanced persistent threat (APT) has breached a critical infrastructure provider. Your team is tasked with the full lifecycle of response.</p>
+                </div>
+                <span style="background: rgba(59, 130, 246, 0.1); color: var(--accent-blue); padding: 8px 16px; border-radius: 4px; font-family: 'Share Tech Mono', monospace; font-size: 14px;">STATUS: PENDING RELEASE (WK 08)</span>
+            </div>
+        </div>
+
+        <div style="margin-top: 60px;">
+            <h2 style="border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 40px;">Project Phases</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
+                <div class="card">
+                    <div style="font-family: 'Share Tech Mono', monospace; color: var(--accent-blue); margin-bottom: 10px;">PHASE 01</div>
+                    <h4>The Forensic Hunt</h4>
+                    <p style="color: var(--text-secondary); font-size: 14px;">Map the adversary's lateral movement and persistence across 5 compromised hosts.</p>
+                </div>
+                <div class="card">
+                    <div style="font-family: 'Share Tech Mono', monospace; color: var(--accent-blue); margin-bottom: 10px;">PHASE 02</div>
+                    <h4>Malware Deep-Dive</h4>
+                    <p style="color: var(--text-secondary); font-size: 14px;">Reverse engineer the custom C2 beacon used in the attack to extract protocol specs.</p>
+                </div>
+                <div class="card">
+                    <div style="font-family: 'Share Tech Mono', monospace; color: var(--accent-blue); margin-bottom: 10px;">PHASE 03</div>
+                    <h4>Detection Engineering</h4>
+                    <p style="color: var(--text-secondary); font-size: 14px;">Develop a Python-based automated detection script to find the threat at scale.</p>
+                </div>
+                <div class="card">
+                    <div style="font-family: 'Share Tech Mono', monospace; color: var(--accent-blue); margin-bottom: 10px;">PHASE 04</div>
+                    <h4>Intel Briefing</h4>
+                    <p style="color: var(--text-secondary); font-size: 14px;">Present your comprehensive technical findings and live detection demo to the board.</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 60px;">
+            <h2 style="border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 40px;">Grading Rubric</h2>
+            <div class="card" style="padding: 0; overflow: hidden;">
+                <table style="width: 100%; border-collapse: collapse; color: var(--text-secondary); font-size: 14px;">
+                    <thead style="background: rgba(255,255,255,0.05); color: var(--text-primary);">
+                        <tr>
+                            <th style="padding: 15px; text-align: left;">Category</th>
+                            <th style="padding: 15px; text-align: left;">Weight</th>
+                            <th style="padding: 15px; text-align: left;">Key Metric</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 15px;">Forensic Accuracy</td>
+                            <td style="padding: 15px;">30%</td>
+                            <td style="padding: 15px;">Completeness of the "Super Timeline" and TTP mapping.</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 15px;">RE Depth</td>
+                            <td style="padding: 15px;">30%</td>
+                            <td style="padding: 15px;">Extraction of C2 configuration and obfuscated strings.</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 15px;">Automation Quality</td>
+                            <td style="padding: 15px;">25%</td>
+                            <td style="padding: 15px;">Efficiency and reliability of the Python detection script.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px;">Technical Reporting</td>
+                            <td style="padding: 15px;">15%</td>
+                            <td style="padding: 15px;">Clarity, professionalism, and actionable intelligence.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</BaseLayout>

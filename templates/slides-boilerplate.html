@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITLE}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Rajdhani:wght@500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/slides.css">
+    <style>
+        .nav-controls {
+            position: fixed;
+            top: 20px;
+            right: 40px;
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.9);
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid #22c55e;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);
+        }
+        .nav-btn {
+            background: none;
+            border: none;
+            color: #22c55e;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        .nav-btn:hover { transform: scale(1.2); }
+        .slide-container { display: none; }
+        .slide-container.active { display: flex; }
+    </style>
+</head>
+<body>
+    <div class="nav-controls">
+        <button class="nav-btn" id="prevBtn"><i class="fa-solid fa-circle-arrow-left"></i></button>
+        <span id="slideNum" style="font-family: 'Share Tech Mono', monospace; color: #f8fafc; align-self: center;">1 / {{TOTAL_SLIDES}}</span>
+        <button class="nav-btn" id="nextBtn"><i class="fa-solid fa-circle-arrow-right"></i></button>
+    </div>
+
+    <!-- START SLIDES -->
+    
+    <!-- Title Slide Example -->
+    <div class="slide-container active">
+        <div class="title-layout">
+            <div class="course-id">DCO 550 // CAPSTONE</div>
+            <h1>{{COURSE_TITLE}}<br>& {{SUBTITLE}}</h1>
+            <p class="subtitle">Session {{SESSION_ID}}: {{SESSION_NAME}}</p>
+            <div class="instructor">Instructor: Iver Iverson / Sentar Contractor</div>
+        </div>
+    </div>
+
+    <!-- Standard Content Slide Template -->
+    <div class="slide-container">
+        <h2 class="slide-title">Slide <span>Title</span></h2>
+        <div class="content-area">
+            <!-- Your Content Here -->
+        </div>
+    </div>
+
+    <!-- END SLIDES -->
+
+    <script>
+        const slides = document.querySelectorAll('.slide-container');
+        const slideNum = document.getElementById('slideNum');
+        let currentSlide = 0;
+
+        function updateSlides() {
+            slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+            slideNum.innerText = `${currentSlide + 1} / ${slides.length}`;
+        }
+
+        document.getElementById('nextBtn').onclick = () => {
+            if (currentSlide < slides.length - 1) { currentSlide++; updateSlides(); }
+        };
+
+        document.getElementById('prevBtn').onclick = () => {
+            if (currentSlide > 0) { currentSlide--; updateSlides(); }
+        };
+
+        window.onkeydown = (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                if (currentSlide < slides.length - 1) { currentSlide++; updateSlides(); }
+            } else if (e.key === 'ArrowLeft') {
+                if (currentSlide > 0) { currentSlide--; updateSlides(); }
+            }
+        };
+
+        window.onload = updateSlides;
+    </script>
+</body>
+</html>

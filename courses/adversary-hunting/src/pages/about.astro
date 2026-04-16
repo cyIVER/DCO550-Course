@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About the Course">
+    <section class="hero">
+        <div class="container">
+            <div style="font-family: 'Share Tech Mono', monospace; color: var(--accent-green); letter-spacing: 4px; margin-bottom: 20px;">DCO 550 // MISSION PROFILE</div>
+            <h1>About <span class="accent">The Course</span></h1>
+            <p style="font-size: 20px; color: var(--text-secondary); max-width: 800px; margin: 20px auto;">
+                Bridging the gap between cybersecurity subject matter expertise and advanced technical implementation.
+            </p>
+        </div>
+    </section>
+
+    <section class="container" style="padding: 80px 0;">
+        <div class="two-column" style="align-items: flex-start;">
+            <div>
+                <h2 style="color: var(--accent-green);">The Mission</h2>
+                <p>
+                    DCO 550: Advanced Adversary Hunting & Malware RE is designed as a college-style, capstone-level course for the modern cyber defender. Unlike traditional security training that focuses on tools alone, this course emphasizes a <strong>methodological triad</strong>: Deep Forensics, Reverse Engineering, and Scalable Data Science.
+                </p>
+                <p>
+                    Our goal is to produce hunters who can not only find "the weird" on a single host but can build the automation and logic required to defend an entire enterprise.
+                </p>
+
+                <h2 style="color: var(--accent-green); margin-top: 40px;">What We Build</h2>
+                <ul style="color: var(--text-secondary);">
+                    <li>Practical, technically credible hunt methodologies.</li>
+                    <li>Automated ETL pipelines for security telemetry.</li>
+                    <li>Deep malware triage and analysis workflows.</li>
+                    <li>MITRE ATT&CK mapped detection logic.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h2 style="color: var(--accent-green); margin-top: 0;">The Instructor</h2>
+                <h3 style="margin-bottom: 5px;">Iver Iverson</h3>
+                <div style="font-family: 'Share Tech Mono', monospace; color: var(--text-secondary); font-size: 14px; margin-bottom: 20px;">CYBER THREAT HUNTER // DCO OPERATOR</div>
+                
+                <p style="font-size: 14px; color: var(--text-secondary);">
+                    Iver is a cybersecurity professional with extensive real-world experience in defensive cyber operations and threat hunting. His background includes:
+                </p>
+                <ul style="font-size: 14px; color: var(--text-secondary); padding-left: 20px;">
+                    <li>Enterprise Threat Hunting (KQL/Sentinel)</li>
+                    <li>Host and Network Telemetry Analysis</li>
+                    <li>Detection Engineering & Automation</li>
+                    <li>Malware Analysis & Investigation</li>
+                </ul>
+                <p style="font-size: 14px; color: var(--text-secondary);">
+                    Iver approaches this course from the perspective of a practitioner, ensuring that every lesson is grounded in realistic, operational analysis.
+                </p>
+            </div>
+        </div>
+    </section>
+</BaseLayout>

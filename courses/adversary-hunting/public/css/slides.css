@@ -1,0 +1,353 @@
+/* 1. THE SETUP */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #020617; 
+    display: grid;
+    gap: 40px;
+    grid-template-columns: 1fr;
+    margin: 0;
+    min-height: 100vh;
+    padding: 40px 0;
+    place-items: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.slide-container {
+    align-items: center;
+    background-color: #0f172a; 
+    background-image: 
+        radial-gradient(circle at 50% 0%, #1e293b 0%, transparent 70%),
+        linear-gradient(rgba(34, 197, 94, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34, 197, 94, 0.03) 1px, transparent 1px);
+    background-size: 100% 100%, 40px 40px, 40px 40px;
+    border-radius: 12px;
+    border: 1px solid #1e293b;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(34, 197, 94, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 720px;
+    justify-content: flex-start; 
+    overflow: hidden;
+    padding: 60px 80px; /* Reduced top/bottom padding to maximize space */
+    position: relative;
+    width: 1280px;
+}
+
+/* Header & Footer decorations */
+.slide-container::before {
+    content: 'DCO-550 // SYSTEM: NOMINAL';
+    position: absolute;
+    top: 25px;
+    left: 40px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    color: #22c55e;
+    letter-spacing: 2px;
+}
+
+.slide-container::after {
+    content: 'MCCOG DCO THREAT HUNT';
+    position: absolute;
+    bottom: 25px;
+    right: 40px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    color: #475569;
+    letter-spacing: 2px;
+}
+
+.watermark-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    opacity: 0.04;
+    z-index: 0 !important;
+    pointer-events: none;
+}
+
+.slide-container > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* 2. CONSISTENT TYPOGRAPHY */
+.slide-container h1,
+.slide-container h2,
+.slide-container h3,
+.slide-container h4 {
+    color: #f8fafc;
+    font-family: 'Rajdhani', sans-serif;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.slide-container h1 {
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 1px;
+}
+
+.slide-container h1 span.accent {
+    color: #22c55e;
+}
+
+.slide-container h2.slide-title {
+    font-size: 48px;
+    font-weight: 700;
+    margin-top: -15px; 
+    margin-bottom: 0px; /* Zero gap to content */
+    text-align: left;
+    width: 100%;
+    max-width: 100%; /* Use full width */
+    white-space: nowrap; /* Always one line */
+    border-bottom: 2px solid #1e293b;
+    padding-bottom: 5px; /* Tight underline */
+    letter-spacing: 1px;
+}
+
+.slide-container h2.slide-title span {
+    color: #22c55e;
+}
+
+.slide-container h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #f1f5f9;
+}
+
+.slide-container p,
+.slide-container li,
+.slide-container .subtitle {
+    color: #cbd5e1;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.slide-container .subtitle {
+    color: #94a3b8;
+    font-size: 24px;
+    margin-top: 20px;
+    font-weight: 400;
+}
+
+.content-area {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+    width: 100%;
+}
+
+/* 3. LAYOUT DEFINITIONS */
+.title-layout {
+    text-align: center;
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.title-layout .course-id {
+    font-family: 'Share Tech Mono', monospace;
+    color: #22c55e;
+    font-size: 24px;
+    margin-bottom: 20px;
+    letter-spacing: 4px;
+}
+
+.title-layout .instructor {
+    margin-top: 50px;
+    font-family: 'Share Tech Mono', monospace;
+    color: #64748b;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.two-column {
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    width: 100%;
+}
+
+.two-column ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.two-column li {
+    margin-bottom: 15px;
+    padding-left: 25px;
+    position: relative;
+}
+
+.two-column li::before {
+    content: '>';
+    color: #22c55e;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 18px;
+    font-weight: bold;
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+
+.two-column li strong {
+    color: #f8fafc;
+}
+
+.image-wrapper {
+    border-radius: 8px;
+    border: 1px solid #334155;
+    height: 400px;
+    max-width: 100%;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    background-color: #020617;
+}
+
+.image-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+    pointer-events: none;
+}
+
+.image-wrapper img {
+    height: 100%;
+    max-width: 100%;
+    object-fit: cover; 
+    width: 100%;
+    opacity: 0.7;
+    filter: grayscale(100%) sepia(100%) hue-rotate(170deg) saturate(300%) brightness(0.7) contrast(1.5);
+}
+
+/* Tiled Content for Slide 3 */
+.tiled-content {
+    align-items: stretch;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    width: 100%;
+}
+
+.tile {
+    background-color: rgba(30, 41, 59, 0.5);
+    border-radius: 8px;
+    border: 1px solid #334155;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 30px 25px;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+}
+
+.tile::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 4px;
+}
+
+.tile.tile-green::before { background-color: #22c55e; }
+.tile.tile-blue::before { background-color: #3b82f6; }
+.tile.tile-yellow::before { background-color: #eab308; }
+
+.tile .icon {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.tile.tile-green .icon { color: #22c55e; }
+.tile.tile-blue .icon { color: #3b82f6; }
+.tile.tile-yellow .icon { color: #eab308; }
+
+.tile h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.tile p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    color: #94a3b8;
+}
+
+/* Callout Box */
+.callout-box {
+    background-color: rgba(234, 179, 8, 0.1);
+    border-left: 4px solid #eab308;
+    padding: 15px 20px;
+    margin-top: 20px;
+    border-radius: 0 8px 8px 0;
+}
+
+.callout-box p {
+    margin: 0;
+    font-size: 16px;
+    color: #f8fafc;
+}
+
+/* Code block simulation */
+.code-block {
+    background-color: #020617;
+    border: 1px solid #1e293b;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+    color: #4ade80;
+    display: inline-block;
+    word-break: break-all;
+    line-height: 1.2;
+}
+
+/* Custom Loop Graphic (Slide 4) */
+.loop-container { position: relative; width: 450px; height: 450px; margin: 0 auto; }
+.loop-node { position: absolute; width: 130px; height: 130px; border-radius: 50%; background: #020617; border: 3px solid; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; z-index: 2; box-shadow: 0 0 15px rgba(0,0,0,0.5); }
+.loop-node i { font-size: 24px; margin-bottom: 8px; }
+.loop-node span { font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 700; color: #fff; text-transform: uppercase; }
+.node-top { top: 0; left: 160px; border-color: #eab308; box-shadow: 0 0 20px rgba(234,179,8,0.2); }
+.node-top i { color: #eab308; }
+.node-right { top: 160px; right: 0; border-color: #22c55e; }
+.node-right i { color: #22c55e; }
+.node-bottom { bottom: 0; left: 160px; border-color: #3b82f6; }
+.node-bottom i { color: #3b82f6; }
+.node-left { top: 160px; left: 0; border-color: #eab308; box-shadow: 0 0 25px rgba(234,179,8,0.5); }
+.node-left i { color: #eab308; }
+.loop-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+
+/* Custom Azure Diagram (Slide 6) */
+.azure-diagram { background: #020817; border: 1px solid #1e3a8a; border-radius: 12px; padding: 40px 30px 30px; width: 100%; position: relative; box-shadow: inset 0 0 50px rgba(0,0,0,0.5); margin-bottom: 10px; }
+.azure-title { position: absolute; top: -16px; left: 40px; background: #020817; padding: 0 15px; color: #60a5fa; font-family: 'Share Tech Mono', monospace; font-size: 22px; display: flex; align-items: center; gap: 10px; }
+.azure-subnets { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+.subnet-box { border: 2px solid; border-radius: 8px; padding: 20px; position: relative; background: rgba(15, 23, 42, 0.7); text-align: center; min-height: 220px; }
+.subnet-title { font-family: 'Inter', sans-serif; font-size: 16px; margin-bottom: 20px; color: #e2e8f0; }
+.subnet-red { border-color: #b91c1c; background: rgba(69, 10, 10, 0.3); }
+.subnet-red .subnet-title { color: #fca5a5; }
+.subnet-green { border-color: #059669; }
+.subnet-green .subnet-title { color: #6ee7b7; }
+.vm-container { display: flex; justify-content: center; gap: 15px; margin-top: 30px; }
+.vm-icon { width: 70px; height: 60px; background: linear-gradient(135deg, #3b82f6, #1d4ed8); border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 6px rgba(0,0,0,0.3); border: 1px solid #60a5fa; position: relative; }
+.vm-icon i { font-size: 24px; margin-bottom: 4px; }
+.vm-icon span { font-family: 'Share Tech Mono', monospace; font-size: 11px; background: rgba(0,0,0,0.5); width: 100%; padding: 2px 0; }
+.shield-icon { position: absolute; top: 50%; left: -20px; transform: translateY(-50%); color: #3b82f6; font-size: 32px; text-shadow: 0 0 10px rgba(59,130,246,0.5); }
+.firewall-icon { position: absolute; top: 50%; left: -30px; transform: translateY(-50%); color: #ef4444; font-size: 36px; }
+.warning-banner { background: rgba(0,0,0,0.6); border-left: 4px solid #06b6d4; padding: 15px 20px; display: flex; align-items: center; gap: 15px; border-radius: 0 6px 6px 0; width: 100%; }
+.warning-banner i { color: #06b6d4; font-size: 32px; }
+.warning-banner p { font-size: 16px; margin: 0; color: #e2e8f0; }
+.warning-banner strong { color: #22d3ee; }

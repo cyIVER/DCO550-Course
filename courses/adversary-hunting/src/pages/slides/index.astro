@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Presentation Slides">
+    <section class="hero">
+        <div class="container">
+            <div style="font-family: 'Share Tech Mono', monospace; color: var(--accent-green); letter-spacing: 4px; margin-bottom: 20px;">DCO 550 // BRIEFING ROOM</div>
+            <h1>Presentation <span class="accent">Slides</span></h1>
+            <p style="font-size: 20px; color: var(--text-secondary); max-width: 800px; margin: 20px auto;">
+                Academic lectures and technical briefings for Advanced Adversary Hunting.
+            </p>
+        </div>
+    </section>
+
+    <section class="container" style="padding: 60px 0;">
+        
+        <div style="margin-bottom: 60px;" data-week-section="1">
+            <h2 style="color: var(--accent-green); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 30px;">Week 01: Foundational Hunting</h2>
+            <div class="links-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <a href="/courses/adversary-hunting/slides/mod1-wk1-lsn1.html" target="_blank" class="card" style="text-decoration: none; display: block; transition: border-color 0.2s;">
+                    <div style="font-family: 'Share Tech Mono', monospace; color: var(--accent-green); font-size: 12px; margin-bottom: 10px;">SESSION 1.1</div>
+                    <h3 style="margin: 0; font-size: 20px;">The Modern Hunter's Triad</h3>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-top: 10px;">Course overview and the integration of Forensics, RE, and Data Science.</p>
+                </a>
+                
+                <a href="/courses/adversary-hunting/slides/mod1-wk1-lsn2.html" target="_blank" class="card" style="text-decoration: none; display: block; transition: border-color 0.2s;">
+                    <div style="font-family: 'Share Tech Mono', monospace; color: var(--accent-green); font-size: 12px; margin-bottom: 10px;">SESSION 1.2</div>
+                    <h3 style="margin: 0; font-size: 20px;">The Hunter's Toolkit</h3>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-top: 10px;">Introduction to Ghidra, Volatility 3, and Plaso.</p>
+                </a>
+            </div>
+            <div class="lock-msg" style="display: none; padding: 40px; background: var(--bg-surface); border: 1px dashed var(--border); text-align: center; color: var(--text-secondary); font-style: italic;">
+                Week 01 Content is currently locked by instructor.
+            </div>
+        </div>
+
+        <div style="margin-bottom: 60px;" data-week-section="2">
+            <h2 style="color: var(--accent-blue); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 30px;">Week 02: Advanced Persistence</h2>
+            <div class="links-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <a href="/courses/adversary-hunting/slides/mod1-wk2-lsn1.html" target="_blank" class="card" style="text-decoration: none; display: block; transition: border-color 0.2s;">
+                    <div style="font-family: 'Share Tech Mono', monospace; color: var(--accent-blue); font-size: 12px; margin-bottom: 10px;">SESSION 2.1</div>
+                    <h3 style="margin: 0; font-size: 20px;">Hunting for Persistence</h3>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-top: 10px;">Deep dive into Registry, WMI, and Scheduled Tasks.</p>
+                </a>
+
+                <a href="/courses/adversary-hunting/slides/mod1-wk2-lsn2.html" target="_blank" class="card" style="text-decoration: none; display: block; transition: border-color 0.2s;">
+                    <div style="font-family: 'Share Tech Mono', monospace; color: var(--accent-blue); font-size: 12px; margin-bottom: 10px;">SESSION 2.2</div>
+                    <h3 style="margin: 0; font-size: 20px;">Basic Static Analysis</h3>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-top: 10px;">Initial triage and analysis of malicious binaries without execution.</p>
+                </a>
+            </div>
+            <div class="lock-msg" style="display: none; padding: 40px; background: var(--bg-surface); border: 1px dashed var(--border); text-align: center; color: var(--text-secondary); font-style: italic;">
+                Week 02 Content is currently locked by instructor.
+            </div>
+        </div>
+
+        <div style="margin-bottom: 60px;" data-week-section="3">
+            <h2 style="color: var(--accent-blue); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 30px;">Week 03: Memory Analysis</h2>
+            <div class="links-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <a href="/courses/adversary-hunting/slides/mod1-wk3-lsn1.html" target="_blank" class="card" style="text-decoration: none; display: block; transition: border-color 0.2s;">
+                    <div style="font-family: 'Share Tech Mono', monospace; color: var(--accent-blue); font-size: 12px; margin-bottom: 10px;">SESSION 3.1</div>
+                    <h3 style="margin: 0; font-size: 20px;">Memory Forensics for Hunting</h3>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-top: 10px;">Finding code injection, process hollowing, and reflective loading.</p>
+                </a>
+            </div>
+            <div class="lock-msg" style="display: none; padding: 40px; background: var(--bg-surface); border: 1px dashed var(--border); text-align: center; color: var(--text-secondary); font-style: italic;">
+                Week 03 Content is currently locked by instructor.
+            </div>
+        </div>
+
+    </section>
+
+    <script>
+        function applySlideLock() {
+            const state = JSON.parse(localStorage.getItem('dco550_module_state')) || {
+                '1': 'unlocked',
+                '2': 'unlocked',
+                '3': 'locked'
+            };
+
+            Object.keys(state).forEach(modId => {
+                const section = document.querySelector(`[data-week-section="${modId}"]`);
+                if (!section) return;
+
+                const links = section.querySelector('.links-container');
+                const msg = section.querySelector('.lock-msg');
+
+                if (state[modId] === 'locked') {
+                    links.style.display = 'none';
+                    msg.style.display = 'block';
+                    section.style.opacity = '0.6';
+                } else {
+                    links.style.display = 'grid';
+                    msg.style.display = 'none';
+                    section.style.opacity = '1';
+                }
+            });
+        }
+
+        window.addEventListener('load', applySlideLock);
+        window.addEventListener('storage', applySlideLock);
+    </script>
+</BaseLayout>
+
+<style>
+    .card:hover {
+        border-color: var(--accent-green) !important;
+    }
+</style>

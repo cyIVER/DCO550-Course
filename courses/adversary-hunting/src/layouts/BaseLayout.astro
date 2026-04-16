@@ -1,0 +1,162 @@
+---
+const { title } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} | DCO 550</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Rajdhani:wght@500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style is:global>
+        :root {
+            --bg-dark: #020617;
+            --bg-surface: #0f172a;
+            --accent-green: #22c55e;
+            --accent-blue: #3b82f6;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --border: #1e293b;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav {
+            background-color: var(--bg-surface);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 24px;
+            color: var(--accent-green);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            text-transform: uppercase;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-green);
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 60px 0;
+            margin-top: 100px;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            background: radial-gradient(circle at 50% 0%, #1e293b 0%, transparent 70%);
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            margin: 0;
+        }
+
+        .accent {
+            color: var(--accent-green);
+        }
+
+        .card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-green);
+            color: #000;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="/courses/adversary-hunting/" class="logo">DCO-550 // MOONBASE</a>
+            <div class="nav-links">
+                <a href="/courses/adversary-hunting/">Home</a>
+                <a href="/courses/adversary-hunting/about/">About</a>
+                <a href="/courses/adversary-hunting/syllabus/">Syllabus</a>
+                <a href="/courses/adversary-hunting/slides/">Slides</a>
+                <a href="/courses/adversary-hunting/labs/">Labs</a>
+                <a href="/courses/adversary-hunting/resources/">Resources</a>
+                <a href="/courses/adversary-hunting/capstone/">Capstone</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <slot />
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Iver Iverson | Advanced Adversary Hunting & Malware RE</p>
+            <p style="font-family: 'Share Tech Mono', monospace; font-size: 12px; margin-top: 10px;">SYSTEM STATUS: NOMINAL</p>
+        </div>
+    </footer>
+</body>
+</html>

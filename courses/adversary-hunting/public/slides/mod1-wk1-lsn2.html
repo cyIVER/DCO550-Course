@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DCO 550 Presentation - Session 1.2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Rajdhani:wght@500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/slides.css">
+    <style>
+        /* Keeping the Enhanced Mockup Styles */
+        .mock-window {
+            width: 100%;
+            height: 440px;
+            background: #020617;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            position: relative;
+        }
+        .mock-header {
+            background: #1e293b;
+            padding: 8px 15px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 14px;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+        }
+        .mock-header::before {
+            content: '•••';
+            letter-spacing: 2px;
+            color: #475569;
+            margin-right: 15px;
+            font-size: 18px;
+            line-height: 1;
+        }
+        .mock-content {
+            flex: 1;
+            overflow: hidden;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+            padding: 20px;
+            color: #e2e8f0;
+        }
+        .highlight-row {
+            background: rgba(34, 197, 94, 0.1);
+            border-left: 3px solid #22c55e;
+            padding-left: 5px;
+        }
+        .error-row {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 3px solid #ef4444;
+            padding-left: 5px;
+        }
+        .nav-controls {
+            position: fixed;
+            top: 20px;
+            right: 40px;
+            display: flex; gap: 20px;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.9);
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid #22c55e;
+        }
+        .nav-btn { background: none; border: none; color: #22c55e; font-size: 24px; cursor: pointer; }
+        .slide-container { display: none; }
+        .slide-container.active { display: flex; }
+    </style>
+</head>
+<body>
+    <div class="nav-controls">
+        <button class="nav-btn" id="prevBtn"><i class="fa-solid fa-circle-arrow-left"></i></button>
+        <span id="slideNum" style="font-family: 'Share Tech Mono', monospace; color: #f8fafc; align-self: center;">1 / 6</span>
+        <button class="nav-btn" id="nextBtn"><i class="fa-solid fa-circle-arrow-right"></i></button>
+    </div>
+
+    <!-- Slide 1: Title_Slide -->
+    <div class="slide-container active" id="slide1">
+        <div class="title-layout">
+            <div class="course-id">DCO 550 // CAPSTONE</div>
+            <h1>The Hunter's <span class="accent">Toolkit</span></h1>
+            <p class="subtitle">Session 1.2: Ghidra, Volatility 3, Plaso</p>
+            <div class="instructor">Instructor: Iver Iverson / Sentar Contractor</div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Ghidra -->
+    <div class="slide-container" id="slide2">
+        <h2 class="slide-title">Ghidra: <span>The Disassembler & Decompiler</span></h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div style="font-size: 15px;">
+                    <ul>
+                        <li><strong>What it is:</strong> A free, full-featured Software Reverse Engineering (SRE) framework developed and released by the NSA.</li>
+                        <li><strong>Core Function (Disassembler):</strong> Takes a compiled executable (binary) and translates the machine code back into human-readable assembly language (e.g., x86, ARM).</li>
+                        <li><strong>Magic Feature (Decompiler):</strong> Attempts to translate the assembly code into a high-level C-like pseudocode. This is our primary tool for understanding program logic quickly.</li>
+                        <li><strong>Our Use Case:</strong> We use it to perform <strong>Static Analysis</strong>—analyzing a program's structure, strings, and logic without having to run it.</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="mock-window" style="border-color: #3b82f6;">
+                        <div class="mock-header">Ghidra: CodeBrowser - malware_sample.exe</div>
+                        <div class="mock-content" style="display:flex; padding: 0;">
+                            <div style="width: 45%; border-right: 1px solid #1e293b; padding: 10px; font-size: 11px;">
+                                <div style="color: #cbd5e1; margin-bottom: 5px; font-weight: bold;">Listing: .text</div>
+                                <span style="color:#64748b">00401050</span> PUSH EBP<br>
+                                <span style="color:#64748b">00401058</span> CALL <span style="color:#4ade80">CreateMutexA</span><br>
+                                <span style="color:#64748b">0040105d</span> TEST EAX, EAX
+                            </div>
+                            <div style="width: 55%; padding: 10px; font-size: 11px; background: #0f172a;">
+                                <div style="color: #cbd5e1; margin-bottom: 5px; font-weight: bold;">Decompiler: main</div>
+                                <span style="color: #c678dd;">void</span> <span style="color: #61afef;">main</span>() {<br>
+                                &nbsp;&nbsp;hMutex = <span style="color: #56b6c2;">CreateMutexA</span>(NULL, FALSE, <span style="color: #98c379;">"Global\\Malware_Mtx"</span>);<br>
+                                &nbsp;&nbsp;<span style="color: #c678dd;">if</span> (hMutex == NULL) { <span style="color: #56b6c2;">ExitProcess</span>(0); }<br>
+                                &nbsp;&nbsp;<span style="color: #56b6c2; background: rgba(59, 130, 246, 0.3);">init_C2_Comms();</span><br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Volatility 3 -->
+    <div class="slide-container" id="slide3">
+        <h2 class="slide-title">Volatility 3: <span>The Memory Forensics Framework</span></h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div style="font-size: 15px;">
+                    <p><strong>Why Memory is King:</strong> RAM contains a treasure trove of evidence that may never touch the disk:</p>
+                    <ul style="margin-top: 5px;">
+                        <li>Running processes (including hidden or injected ones)</li>
+                        <li>Active and recent network connections</li>
+                        <li>Plaintext passwords, encryption keys, and sensitive data</li>
+                        <li>Reflectively loaded DLLs and fileless malware</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>How it Works:</strong> Python framework using a powerful plugin system to parse specific data structures in memory.</p>
+                    <p><strong>Our Use Case:</strong> Find evidence of adversary actions <em>as they were happening</em>.</p>
+                </div>
+                <div>
+                    <div class="mock-window" style="border-color: #22c55e;">
+                        <div class="mock-header">user@sift:~/evidence$ vol.py windows.malfind</div>
+                        <div class="mock-content" style="font-size: 11px;">
+                            <div style="color: #4ade80; margin-bottom: 5px;">Volatility 3 Framework 2.4.1</div>
+                            <div class="highlight-row">
+                                PID: 1240 (explorer.exe) <br>
+                                Tag: VadS | Protect: 6 (EXECUTE_READWRITE)<br>
+                                <span style="color: #ef4444; font-weight: bold;">Heuristic: MZ Header Found in Data Section</span><br>
+                                4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Plaso -->
+    <div class="slide-container" id="slide4">
+        <h2 class="slide-title">Plaso: <span>The Super Timeline Creator</span></h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div style="font-size: 15px;">
+                    <ul>
+                        <li><strong>Full Name:</strong> "Plaso Langar Að Safna Öllu" (Icelandic for <em>"Plaso wants to collect everything"</em>).</li>
+                        <li><strong>Core Function:</strong> It parses everything—Registry hives, browser history, event logs, file system metadata (MFT)—and aggregates all events into a single chronological file.</li>
+                        <li><strong>The "Super Timeline":</strong> Building a complete, undeniable narrative of an intrusion from start to finish.</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="mock-window" style="border-color: #eab308;">
+                        <div class="mock-header">user@sift:~/evidence$ cat timeline.csv | head</div>
+                        <div class="mock-content" style="font-size: 11px;">
+                            <div style="color: #94a3b8; border-bottom: 1px dashed #334155; margin-bottom: 5px;">Time,Source,Type,User,Desc</div>
+                            <div class="highlight-row">14:20:05, NTFS, File Creation, iver, C:\Users\iver\Downloads\payload.exe</div>
+                            <div class="error-row">14:20:10, EVTX, Security 4688, SYSTEM, New Process: payload.exe</div>
+                            <div style="color: #facc15;">14:20:15, REG, NTUSER.DAT, iver, Run Key Modified -> payload.exe</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: The Integrated Workflow -->
+    <div class="slide-container" id="slide5">
+        <h2 class="slide-title">The Integrated <span>Workflow</span></h2>
+        <div class="content-area">
+            <div class="two-column" style="gap: 40px;">
+                <div style="font-size: 15px;">
+                    <ol>
+                        <li><strong>Start: The Hunt</strong><br>Analyze memory with <strong>Volatility</strong> or disk with <strong>Plaso</strong> to find suspicious events.</li>
+                        <li><strong>Next: Extract</strong><br>Carve the suspicious executable from the memory dump or copy it from the disk image.</li>
+                        <li><strong>Then: Analyze</strong><br>Load the executable into <strong>Ghidra</strong> to reverse engineer logic and find unique indicators.</li>
+                        <li><strong>Finally: Pivot</strong><br>Use high-fidelity indicators from Ghidra to launch a new, enterprise-wide hunt.</li>
+                    </ol>
+                </div>
+                <div style="display: flex; justify-content: center;">
+                    <div class="loop-container" style="transform: scale(0.9);">
+                        <svg class="loop-svg" viewBox="0 0 450 450">
+                            <path d="M 225 65 A 160 160 0 0 1 385 225" fill="none" stroke="#475569" stroke-width="4" stroke-dasharray="8,8" />
+                            <path d="M 385 225 A 160 160 0 0 1 225 385" fill="none" stroke="#475569" stroke-width="4" stroke-dasharray="8,8" />
+                            <path d="M 225 385 A 160 160 0 0 1 65 225" fill="none" stroke="#475569" stroke-width="4" stroke-dasharray="8,8" />
+                            <path d="M 65 225 A 160 160 0 0 1 225 65" fill="none" stroke="#475569" stroke-width="4" stroke-dasharray="8,8" />
+                        </svg>
+                        <div class="loop-node node-top" style="border-color:#22c55e;"><i class="fa-solid fa-search"></i><span>1. Hunt</span></div>
+                        <div class="loop-node node-right" style="border-color:#3b82f6;"><i class="fa-solid fa-file-export"></i><span>2. Extract</span></div>
+                        <div class="loop-node node-bottom" style="border-color:#60a5fa;"><i class="fa-solid fa-code"></i><span>3. Analyze</span></div>
+                        <div class="loop-node node-left" style="border-color:#facc15;"><i class="fa-solid fa-bullseye"></i><span>4. Pivot</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Lab 1 Validation -->
+    <div class="slide-container" id="slide6">
+        <h2 class="slide-title">Lab 1: <span>Azure Environment Validation</span></h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div style="font-size: 15px;">
+                    <ul>
+                        <li>Today's lab is not about finding evil; it's about <strong>ensuring your cyber range is properly constructed and safe.</strong></li>
+                        <li>Follow the lab guide to validate network connectivity and isolation as defined by our NSGs.</li>
+                        <li>Test the Azure Snapshot feature—your primary safety net for the Malware VM.</li>
+                        <li>A functional lab is the mandatory foundation for the entire course. Do not proceed until complete.</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="image-wrapper" style="border-color: #ef4444; border-width: 2px;">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80" alt="Cloud networking">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide-container');
+        const slideNum = document.getElementById('slideNum');
+        let currentSlide = 0;
+
+        function updateSlides() {
+            slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+            slideNum.innerText = `${currentSlide + 1} / ${slides.length}`;
+        }
+
+        document.getElementById('nextBtn').onclick = () => {
+            if (currentSlide < slides.length - 1) { currentSlide++; updateSlides(); }
+        };
+
+        document.getElementById('prevBtn').onclick = () => {
+            if (currentSlide > 0) { currentSlide--; updateSlides(); }
+        };
+
+        window.onkeydown = (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                if (currentSlide < slides.length - 1) { currentSlide++; updateSlides(); }
+            } else if (e.key === 'ArrowLeft') {
+                if (currentSlide > 0) { currentSlide--; updateSlides(); }
+            }
+        };
+
+        window.onload = updateSlides;
+    </script>
+</body>
+</html>

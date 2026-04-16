@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Hunter's Toolbox & Resources">
+    <section class="hero">
+        <div class="container">
+            <div style="font-family: 'Share Tech Mono', monospace; color: var(--accent-green); letter-spacing: 4px; margin-bottom: 20px;">DCO 550 // ARMORY</div>
+            <h1>Hunter's <span class="accent">Toolbox</span></h1>
+            <p style="font-size: 20px; color: var(--text-secondary); max-width: 800px; margin: 20px auto;">
+                Essential tools, code snippets, and datasets for the modern adversary hunter.
+            </p>
+        </div>
+    </section>
+
+    <section class="container" style="padding: 60px 0;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+            <div>
+                <h2 style="color: var(--accent-green); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 30px;">Digital Forensics</h2>
+                
+                <div class="card">
+                    <h3>Volatility 3 Quick-Start</h3>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 15px;">Analyze memory dumps for hidden processes and code injection.</p>
+                    <code style="display: block; background: #000; padding: 15px; border-radius: 4px; font-size: 12px; color: var(--accent-green);">
+                        python3 vol.py -f mem.raw windows.pslist<br/>
+                        python3 vol.py -f mem.raw windows.malfind
+                    </code>
+                </div>
+
+                <div class="card">
+                    <h3>Plaso (Log2Timeline)</h3>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 15px;">Create a super timeline from various forensic artifacts.</p>
+                    <code style="display: block; background: #000; padding: 15px; border-radius: 4px; font-size: 12px; color: var(--accent-green);">
+                        log2timeline.py --storage-file timeline.plaso /mnt/evidence<br/>
+                        psort.py -o l2tcsv -w timeline.csv timeline.plaso
+                    </code>
+                </div>
+            </div>
+
+            <div>
+                <h2 style="color: var(--accent-blue); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 30px;">Data Science Snippets</h2>
+                
+                <div class="card">
+                    <h3>Calculating Shannon Entropy</h3>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 15px;">Use this to detect obfuscated strings or DGA domains.</p>
+                    <pre style="background: #000; padding: 15px; border-radius: 4px; font-size: 12px; color: var(--accent-blue); overflow-x: auto;">
+import math
+from collections import Counter
+
+def shannon_entropy(data):
+    if not data: return 0
+    entropy = 0
+    for count in Counter(data).values():
+        p = count / len(data)
+        entropy -= p * math.log2(p)
+    return entropy</pre>
+                </div>
+
+                <div class="card">
+                    <h3>Z-Score Outlier Detection</h3>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 15px;">Identify anomalous beaconing behavior in network logs.</p>
+                    <pre style="background: #000; padding: 15px; border-radius: 4px; font-size: 12px; color: var(--accent-blue); overflow-x: auto;">
+import pandas as pd
+
+def find_outliers(df, column):
+    mean = df[column].mean()
+    std = df[column].std()
+    df['z_score'] = (df[column] - mean) / std
+    return df[df['z_score'].abs() > 3]</pre>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 60px;">
+            <h2 style="color: var(--text-primary); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 30px;">Sample Datasets</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                <div class="card" style="text-align: center;">
+                    <i class="fa-solid fa-file-csv" style="font-size: 40px; color: var(--accent-green); margin-bottom: 15px;"></i>
+                    <h4>DNS Logs (Noisy)</h4>
+                    <p style="color: var(--text-secondary); font-size: 12px;">Practice ETL and DGA detection.</p>
+                    <a href="#" class="btn" style="padding: 8px 16px; font-size: 12px;">Download .CSV</a>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <i class="fa-solid fa-file-code" style="font-size: 40px; color: var(--accent-blue); margin-bottom: 15px;"></i>
+                    <h4>Process Creation Events</h4>
+                    <p style="color: var(--text-secondary); font-size: 12px;">Practice parent-child analysis.</p>
+                    <a href="#" class="btn" style="padding: 8px 16px; font-size: 12px; background-color: var(--accent-blue);">Download .JSON</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</BaseLayout>

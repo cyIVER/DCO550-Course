@@ -1,0 +1,138 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Instructor Management">
+    <section class="hero">
+        <div class="container">
+            <div style="font-family: 'Share Tech Mono', monospace; color: var(--accent-green); letter-spacing: 4px; margin-bottom: 20px;">DCO 550 // COMMAND CENTER</div>
+            <h1>Instructor <span class="accent">Management</span></h1>
+            <p style="font-size: 20px; color: var(--text-secondary); max-width: 800px; margin: 20px auto;">
+                Control course content visibility and system status.
+            </p>
+        </div>
+    </section>
+
+    <section class="container" style="padding: 60px 0;">
+        <div id="login-gate" class="card" style="max-width: 500px; margin: 0 auto; text-align: center;">
+            <h3>Access Required</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 20px;">Enter the instructor override code to continue.</p>
+            <input type="password" id="password" placeholder="ENTER CODE" style="width: 100%; padding: 12px; background: var(--bg-dark); border: 1px solid var(--border); color: var(--accent-green); font-family: 'Share Tech Mono', monospace; text-align: center; margin-bottom: 20px; outline: none; border-radius: 4px;">
+            <button id="login-btn" class="btn" style="width: 100%;">Authorize</button>
+            <p id="error-msg" style="color: #ef4444; font-size: 12px; margin-top: 10px; display: none;">INVALID ACCESS CODE // SYSTEM LOCKED</p>
+        </div>
+
+        <div id="management-panel" style="display: none;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div class="card">
+                    <h3 style="color: var(--accent-green);">Content Visibility</h3>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 20px;">Toggle module availability for students.</p>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 15px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 4px;">
+                            <span>Module 01: Triad</span>
+                            <span style="color: var(--accent-green); font-weight: bold;">[ ACTIVE ]</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 4px;">
+                            <span>Module 02: Persistence</span>
+                            <button class="toggle-btn active" data-module="2">UNLOCKED</button>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 4px;">
+                            <span>Module 03: Memory</span>
+                            <button class="toggle-btn" data-module="3">LOCKED</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 style="color: var(--accent-blue);">System Status</h3>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 20px;">Global platform configuration.</p>
+                    <button class="btn" style="background: var(--bg-dark); color: var(--accent-blue); border: 1px solid var(--accent-blue); width: 100%; margin-bottom: 10px;">Reset Lab Timers</button>
+                    <button class="btn" style="background: var(--bg-dark); color: #ef4444; border: 1px solid #ef4444; width: 100%;">Force System Maintenance</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+    .toggle-btn {
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text-secondary);
+        padding: 5px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 12px;
+        transition: all 0.2s;
+    }
+    .toggle-btn.active {
+        border-color: var(--accent-green);
+        color: var(--accent-green);
+        background: rgba(34, 197, 94, 0.1);
+    }
+    .toggle-btn:hover {
+        background: rgba(255,255,255,0.1);
+    }
+</style>
+
+<script>
+    const loginGate = document.getElementById('login-gate');
+    const managementPanel = document.getElementById('management-panel');
+    const passwordInput = document.getElementById('password');
+    const loginBtn = document.getElementById('login-btn');
+    const errorMsg = document.getElementById('error-msg');
+
+    // Persistent state logic
+    const stateKey = 'dco550_module_state';
+    let moduleState = JSON.parse(localStorage.getItem(stateKey)) || {
+        '1': 'unlocked',
+        '2': 'unlocked',
+        '3': 'locked'
+    };
+
+    function updateUI() {
+        document.querySelectorAll('.toggle-btn').forEach(btn => {
+            const modId = btn.getAttribute('data-module');
+            if (moduleState[modId] === 'unlocked') {
+                btn.classList.add('active');
+                btn.textContent = 'UNLOCKED';
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = 'LOCKED';
+            }
+        });
+    }
+
+    // Simple password check
+    loginBtn.addEventListener('click', () => {
+        if (passwordInput.value === 'hunter-01') {
+            loginGate.style.display = 'none';
+            managementPanel.style.display = 'block';
+            updateUI();
+        } else {
+            errorMsg.style.display = 'block';
+            passwordInput.value = '';
+        }
+    });
+
+    passwordInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') loginBtn.click();
+    });
+
+    // Toggle logic with persistence
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const modId = btn.getAttribute('data-module');
+            const isCurrentlyUnlocked = moduleState[modId] === 'unlocked';
+
+            moduleState[modId] = isCurrentlyUnlocked ? 'locked' : 'unlocked';
+            localStorage.setItem(stateKey, JSON.stringify(moduleState));
+
+            updateUI();
+            console.log(`Module ${modId} set to ${moduleState[modId]}`);
+        });
+    });
+
+</script>

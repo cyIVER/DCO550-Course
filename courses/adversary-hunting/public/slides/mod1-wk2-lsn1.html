@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DCO 550 Presentation - Session 2.1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Rajdhani:wght@500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/slides.css">
+    <style>
+        .nav-controls {
+            position: fixed;
+            top: 20px;
+            right: 40px;
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.9);
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid #22c55e;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);
+        }
+        .nav-btn {
+            background: none;
+            border: none;
+            color: #22c55e;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        .nav-btn:hover { transform: scale(1.2); }
+        .slide-container { display: none; }
+        .slide-container.active { display: flex; }
+    </style>
+</head>
+<body>
+    <div class="nav-controls">
+        <button class="nav-btn" id="prevBtn"><i class="fa-solid fa-circle-arrow-left"></i></button>
+        <span id="slideNum" style="font-family: 'Share Tech Mono', monospace; color: #f8fafc; align-self: center;">1 / 7</span>
+        <button class="nav-btn" id="nextBtn"><i class="fa-solid fa-circle-arrow-right"></i></button>
+    </div>
+
+    <!-- Slide 1: Title Slide -->
+    <div class="slide-container active" id="slide1">
+        <div class="title-layout">
+            <div class="course-id">DCO 550 // CAPSTONE</div>
+            <h1>Hunting for <span class="accent">Persistence</span><br>with Forensics</h1>
+            <p class="subtitle">Session 2.1: Advanced Adversary Hunting & Malware RE</p>
+            <div class="instructor">Instructor: Iver Iverson / Sentar Contractor</div>
+        </div>
+    </div>
+
+    <!-- Slide 2: What is Persistence? -->
+    <div class="slide-container" id="slide2">
+        <h2 class="slide-title">What is <span>Persistence?</span></h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <ul>
+                        <li><strong>Definition:</strong> Persistence is any mechanism an adversary uses to maintain access to a system across restarts, changed credentials, and interruptions.</li>
+                        <li><strong>Adversary Goal:</strong> To survive a reboot. Initial access is fleeting; persistence is long-term control. (<em>The digital key to the house</em>).</li>
+                        <li><strong>Hunter's Goal:</strong> Persistence artifacts are high-value, relatively static targets. While malware may vanish from memory, the mechanism to launch it again must be stored on disk or OS configuration.</li>
+                    </ul>
+                    <div class="callout-box" style="border-left-color: #ef4444; background-color: rgba(239, 68, 68, 0.1);">
+                        <p><strong>MITRE ATT&CK Tactic:</strong> <span style="color: #ef4444;">TA0003 - Persistence</span>. This is one of the most populated tactics, with dozens of documented techniques.</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="image-wrapper" style="background: white; border-radius: 8px; padding: 10px;">
+                        <img src="https://miro.medium.com/v2/resize:fit:1200/1*C680H47pIu86eX-3zP3A7g.png" alt="MITRE ATT&CK Matrix Persistence Tactic" style="max-height: 400px; width: auto; object-fit: contain;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: The Persistence Landscape -->
+    <div class="slide-container" id="slide3">
+        <h2 class="slide-title">The Persistence <span>Landscape</span></h2>
+        <div class="content-area">
+            <p style="margin-top: 10px; margin-bottom: 25px; width: 100%;">Adversaries want to blend in by using legitimate Windows features for their own ends. We will focus on hunting three of the most abused mechanisms:</p>
+            <div class="tiled-content">
+                <div class="tile tile-green">
+                    <div class="icon"><i class="fa-solid fa-gears"></i></div>
+                    <h3>1. THE REGISTRY</h3>
+                    <p>The central configuration database for the Windows operating system.</p>
+                    <p><strong>Why abused:</strong> It is the easiest and most common place to hide an auto-start entry for malicious executables.</p>
+                </div>
+                <div class="tile tile-blue">
+                    <div class="icon"><i class="fa-solid fa-microchip"></i></div>
+                    <h3>2. SERVICES</h3>
+                    <p>Background processes that form the backbone of the OS.</p>
+                    <p><strong>Why abused:</strong> Adversaries create malicious services or hijack legitimate ones to run with `SYSTEM` level privileges.</p>
+                </div>
+                <div class="tile tile-yellow">
+                    <div class="icon"><i class="fa-solid fa-clock"></i></div>
+                    <h3>3. SCHEDULED TASKS</h3>
+                    <p>The native OS job scheduler used for recurring administrative tasks.</p>
+                    <p><strong>Why abused:</strong> Perfect for re-launching malware or establishing a regular, timed C2 beacon to bypass heuristic analysis.</p>
+                </div>
+            </div>
+            <p style="margin-top: 20px; font-style: italic; color: #94a3b8; font-size: 14px;">*Advanced techniques like WMI persistence and COM hijacking will be covered in later modules.*</p>
+        </div>
+    </div>
+
+    <!-- Slide 4: Hunting in the Registry -->
+    <div class="slide-container" id="slide4">
+        <h2 class="slide-title">Hunting in the <span>Registry</span></h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <h3 style="color: #22c55e;">THE TARGETS</h3>
+                    <p>The "Run" and "RunOnce" keys are the most common places to look for system (HKLM) and user (HKCU) persistence:</p>
+                    <ul style="font-family: 'Share Tech Mono', monospace; font-size: 14px; color: #4ade80;">
+                        <li>HKLM\Software\Microsoft\Windows\CurrentVersion\Run</li>
+                        <li>HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce</li>
+                        <li>HKCU\Software\Microsoft\Windows\CurrentVersion\Run</li>
+                        <li>HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce</li>
+                    </ul>
+                    <h3 style="color: #22c55e; margin-top: 20px;">THE FORENSIC METHOD</h3>
+                    <p>We do NOT use regedit. We hunt in offline images.</p>
+                    <ul>
+                        <li><strong>From Memory (.vmem):</strong> Use Volatility. <code>windows.registry.hivelist.HiveList</code> finds the virtual address. Then, <code>windows.registry.printkey.PrintKey</code> queries a specific path.</li>
+                        <li><strong>From Disk (.E01):</strong> Use forensic suites (Autopsy) or specialized tools (RegRipper) that parse hive files (<code>NTUSER.DAT</code>, <code>SOFTWARE</code>).</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="image-wrapper">
+                        <img src="https://belkasoft.com/images/articles/windows-registry-analysis-structure/windows-registry-01-registry-editor.png" alt="Registry Structure Diagram">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Hunting Malicious Services -->
+    <div class="slide-container" id="slide5">
+        <h2 class="slide-title">Hunting Malicious <span>Services</span></h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <div class="callout-box" style="border-left-color: #3b82f6; background-color: rgba(59, 130, 246, 0.1);">
+                        <p style="color: #60a5fa; font-weight: bold; margin-bottom: 10px;">Adversary Techniques:</p>
+                        <ul style="font-size: 16px;">
+                            <li><strong>Masquerading:</strong> Creating a service with a name that looks legitimate (e.g., MicrosoftUpdateSvc).</li>
+                            <li><strong>Binary Path Hijacking:</strong> Modifying the ImagePath of a rarely used service to point to malware.</li>
+                            <li><strong>New Service Creation:</strong> Installing malware directly as a new service, hoping it goes unnoticed.</li>
+                        </ul>
+                    </div>
+                    <h3 style="color: #3b82f6; margin-top: 20px;">THE FORENSIC METHOD</h3>
+                    <ul>
+                        <li><strong>From Memory:</strong> Volatility's <code>windows.svcscan.SvcScan</code> plugin is powerful. It shows all services, state (running/stopped), binary path, and PID. Correlate this with process lists.</li>
+                        <li><strong>From Disk:</strong> Configurations are stored in the SYSTEM registry hive under <code>SYSTEM\CurrentControlSet\Services</code>. Parse this to check ImagePath and DisplayName.</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="image-wrapper">
+                        <img src="https://www.microsoft.com/en-us/security/blog/wp-content/uploads/2026/03/image-7.webp" alt="Service Masquerading Example">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Hunting in Scheduled Tasks -->
+    <div class="slide-container" id="slide6">
+        <h2 class="slide-title">Hunting in <span>Scheduled Tasks</span></h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <h3 style="color: #eab308;">ADVERSARY USE CASE</h3>
+                    <p>Ideal for periodic execution, such as:</p>
+                    <ul>
+                        <li>Checking for a C2 connection every hour.</li>
+                        <li>Re-infecting a system if the primary payload is deleted.</li>
+                        <li>Running automated cleanup scripts.</li>
+                    </ul>
+                    <h3 style="color: #eab308; margin-top: 20px;">THE FORENSIC METHOD</h3>
+                    <ul>
+                        <li><strong>On Disk:</strong> Tasks are stored as XML files in <code>C:\Windows\System32\Tasks</code>. Examine these to see the <code><Command></code>, <code><Arguments></code>, and <code><UserId></code>. Adversaries often forget to change default authors.</li>
+                        <li><strong>In Memory:</strong> Less direct, but you can hunt for the <em>result</em> of a scheduled task, like the <code>schtasks.exe</code> process or the spawned malicious process using <code>windows.pslist.PsList</code>.</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="image-wrapper">
+                        <img src="https://www.cybertriage.com/wp-content/uploads/2024/08/WINDOWS-SCHEDULED-TASKS-1200x720.png" alt="Scheduled Tasks for DFIR">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Lab 2.1: The Hunt Begins -->
+    <div class="slide-container" id="slide7">
+        <h2 class="slide-title">Lab 2.1: <span>The Hunt Begins</span></h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <ul>
+                        <li><strong>Scenario:</strong> You have been given a memory dump from a highly suspect workstation.</li>
+                        <li><strong>Mission:</strong> Apply the principles discussed today. Use Volatility to hunt through the registry inside the memory image to find a stealthy persistence mechanism.</li>
+                    </ul>
+                    <div class="callout-box" style="border-left-color: #22c55e; background-color: rgba(34, 197, 94, 0.1); margin-top: 40px;">
+                        <p style="font-size: 16px; color: #4ade80; text-transform: uppercase; font-weight: bold; margin-bottom: 5px;"><i class="fa-solid fa-bullseye"></i> GOAL</p>
+                        <p>Identify the artifact of persistence and prepare to analyze the malware it points to in our next session. This is step one in the Hunter's Feedback Loop.</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="image-wrapper">
+                        <img src="https://miro.medium.com/v2/resize:fit:1400/1*wi4Ov6KzeeJpLQFSWB7iyA.jpeg" alt="Lab Infrastructure Diagram">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide-container');
+        const slideNum = document.getElementById('slideNum');
+        let currentSlide = 0;
+
+        function updateSlides() {
+            slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+            slideNum.innerText = `${currentSlide + 1} / ${slides.length}`;
+        }
+
+        document.getElementById('nextBtn').onclick = () => {
+            if (currentSlide < slides.length - 1) { currentSlide++; updateSlides(); }
+        };
+
+        document.getElementById('prevBtn').onclick = () => {
+            if (currentSlide > 0) { currentSlide--; updateSlides(); }
+        };
+
+        window.onkeydown = (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                if (currentSlide < slides.length - 1) { currentSlide++; updateSlides(); }
+            } else if (e.key === 'ArrowLeft') {
+                if (currentSlide > 0) { currentSlide--; updateSlides(); }
+            }
+        };
+
+        window.onload = updateSlides;
+    </script>
+</body>
+</html>
