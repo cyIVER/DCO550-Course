@@ -1,24 +1,31 @@
-# MoonBaseIverson
+# DCO 550: Advanced Adversary Hunting & Malware Reverse Engineering
 
-Foundational repository for cybersecurity projects, threat hunting tools, and educational content.
+This repository contains the complete source code, infrastructure, and educational materials for the **DCO 550** course. The platform is designed to provide a high-fidelity, enterprise-grade environment for mastering forensics, malware analysis, and data-driven threat hunting.
 
-## Project Structure
+## 🏹 The Modern Hunter's Triad
+The course architecture is built around the "Hunter's Triad" concept, integrating three critical domains into a unified lab experience:
+1.  **Forensics & Artifact Analysis**: Deep-dive into Windows internals and filesystem forensics.
+2.  **Reverse Engineering**: Behavioral and static analysis of modern malware.
+3.  **Data Science for Hunting**: Leveraging Python, Pandas, and KQL to identify anomalies at scale.
 
-- `courses/`: Educational platforms and course materials.
-  - `adversary-hunting/`: Advanced Adversary Hunting and Malware Analysis course.
-- `infrastructure/`: IaC and CI/CD for course deployments.
-  - `packer/`: Windows Golden Images for forensics and RE.
-  - `terraform/`: Azure Cyber Range provisioning.
-- `tools/`: Operational cybersecurity utilities (KQL, Python, PowerShell).
-- `docs/`: Technical research, methodologies, and knowledge products.
-- `templates/`: Reusable layouts and project scaffolding.
+## 🏗️ Project Structure
 
-## DevSecOps Foundations
+- `courses/adversary-hunting/`: Astro-based web platform serving course modules and syllabus.
+- `infrastructure/`: Enterprise-grade Infrastructure as Code (IaC).
+    - `packer/`: Windows 11 Golden Images pre-instrumented with Ghidra, Volatility 3, x64dbg, and more.
+    - `terraform/`: Automated Azure provisioning of isolated student cyber ranges (172.16.X.0/24).
+    - `scripts/`: PowerShell DSC and automation for AD Forest creation and domain orchestration.
+- `docs/`: Technical research, daily wrap-ups, and lab methodologies.
+- `.agent/`: Specialized AI agent personas and skills for automated course maintenance.
 
-- **CI/CD**: Dual-track pipelines via GitHub Actions (Astro site) and GitLab CI/CD (Enterprise Infrastructure).
-- **IaC**: Immutable infrastructure via Packer and Terraform.
-- **Security**: Isolated malware subnets, Sentinel/MDE telemetry integration, and secret scanning.
-- **Documentation**: Markdown-first approach for all technical content.
+## 🚀 DevSecOps & Deployment
+
+- **Dual-Track CI/CD**: 
+    - **Track 1**: Containerized delivery of the course website via GitHub Actions.
+    - **Track 2**: Full-stack infrastructure deployment via GitLab CI/CD with corporate proxy support.
+- **Sentinel & MDE Integration**: Every lab node is instrumented with Microsoft Defender for Endpoint and streams telemetry to a centralized Microsoft Sentinel workspace.
+- **Isolated Ranges**: Strict egress filtering to ensure safe malware execution within student-specific subnets.
 
 ---
 **Author**: Iver Iverson
+**Status**: ACTIVE - Development Phase
