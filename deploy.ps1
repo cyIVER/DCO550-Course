@@ -81,11 +81,23 @@ function Deploy-Local {
         Write-Error "Docker is required for local hosting. Please run 'Install Dependencies' first."
     }
 
+    Write-Host "  [>] Verifying Docker daemon is responsive..." -ForegroundColor Cyan
+    docker ps > $null 2>&1
+    if ($LASTEXITCODE -ne 0) {
+        Write-Error "Cannot connect to the Docker daemon. Please ensure Docker Desktop is running and fully initialized."
+    }
+
     Write-Host "  [1/2] Building course platform container..." -ForegroundColor Cyan
     docker compose build course-platform
+    if ($LASTEXITCODE -ne 0) {
+        Write-Error "Docker build failed. Check the output above for details."
+    }
 
     Write-Host "  [2/2] Starting containers..." -ForegroundColor Cyan
     docker compose up -d
+    if ($LASTEXITCODE -ne 0) {
+        Write-Error "Failed to start containers. Check the output above for details."
+    }
 
     Write-Host "`n  [SUCCESS] Course platform is now live at: http://localhost:8080" -ForegroundColor Green
     Write-Host "  [INFO] Use 'docker compose down' to stop the services."

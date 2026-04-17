@@ -1,59 +1,64 @@
 ---
 layout: ../../layouts/MarkdownLayout.astro
-title: "Lab 02: Hunting the Shadow Registry"
+title: "Mission 02: Shadow Persistence"
 ---
 
-### **Overview**
-In this lab, you will perform deep-dive forensic analysis of the Windows Registry to identify advanced persistence mechanisms. You will analyze a compromised system where an adversary has established persistence using both traditional and "shadow" (obfuscated) registry keys.
+# MISSION 02: Shadow Persistence (Registry Analysis)
 
----
-
-### **Learning Objectives**
-*   Identify common registry persistence locations (Run, RunOnce, Winlogon).
-*   Discover stealthy persistence via WMI Event Consumers.
-*   Analyze "Null-terminated" or "Hidden" registry keys.
-*   Extract IOCs from registry values for further RE.
+## 1.0 MISSION OBJECTIVE
+Identify and extract advanced persistence mechanisms within the Windows Registry. You will transition from basic triage to deep-dive forensics to uncover "Shadow Keys"—obfuscated registry entries designed to evade standard administrative tools.
 
 ---
 
-### **Environment Setup**
-1.  **System:** Windows 10 "Victim" VM (provided in Azure Lab).
-2.  **Tools:**
-    *   **Registry Editor (regedit.exe)**
-    *   **Eric Zimmerman's RECmd / Registry Explorer**
-    *   **Sysinternals Autoruns**
-    *   **Velociraptor (Local Collector)**
+## 2.0 INTEL: TARGET PROFILE
+An adversary has established a foothold on **TARGET-WK01**. Intelligence suggests they are using a combination of traditional Run keys and high-entropy obfuscated values to maintain access across reboots.
+
+**MITRE ATT&CK Mapping:**
+*   **T1547.001**: Boot or Logon Autostart Execution: Registry Run Keys
+*   **T1112**: Modify Registry
 
 ---
 
-### **Phase 1: Baseline Analysis**
-Before searching for evil, we must understand normal.
-1.  Run `Autoruns64.exe` as Administrator.
-2.  Review the "Everything" tab.
-3.  Filter for "Microsoft" and "Windows" entries to hide legitimate system persistence.
+## 3.0 EXECUTION: SEARCH & RECOVERY
 
-### **Phase 2: Hunting the "Shadow" Keys**
-The adversary has utilized a technique to hide a registry key by prepending it with a null character. Standard `regedit.exe` often fails to display these correctly or throws an error.
+### PHASE 1: Traditional Triage
+Utilize **Autoruns** to baseline the system.
+1.  Launch `Autoruns64.exe` as SYSTEM.
+2.  Review the `Logon` and `Services` tabs.
+3.  **HINT:** Look for "Unsigned" or "File not found" entries that masquerade as legitimate Windows binaries.
+
+### PHASE 2: Hunting Shadow Keys
+Standard `regedit.exe` can be fooled by null-terminated strings. Use **Registry Explorer** for forensic-grade analysis.
 
 1.  Open **Registry Explorer**.
-2.  Load the `SOFTWARE` hive from `C:\Windows\System32\config\`.
-3.  Navigate to `Microsoft\Windows\CurrentVersion\Run`.
-4.  Look for values with unusual names or non-printable characters.
+2.  Navigate to `HKCU\Software\Microsoft\Windows\CurrentVersion\Run`.
+3.  Identify any value names that appear "blank" or contain non-ASCII characters.
+4.  **RECOVERY:** Extract the command-line string associated with the shadow key.
 
-### **Phase 3: WMI Persistence**
-Adversaries often use WMI to trigger execution upon system events (e.g., 5 minutes after boot).
+### PHASE 3: WMI Eventing
+If the registry is clean, the adversary may be using WMI Event Consumers.
 
-1.  Using PowerShell, query the WMI event filters:
-    ```powershell
-    Get-WmiObject -Namespace root\subscription -Class __EventFilter
-    ```
-2.  Analyze the `Query` property for suspicious triggers.
+```powershell
+# Query C2 for WMI Event Filters
+Get-WmiObject -Namespace root\subscription -Class __EventFilter
+```
 
 ---
 
-### **Deliverables**
-Submit a technical report containing:
-1.  A screenshot of the discovered persistence mechanism.
-2.  The full path and value of the malicious registry key.
-3.  The SHA256 hash of the executable pointed to by the persistence.
-4.  A 1-paragraph summary of how this persistence would survive a reboot.
+## 4.0 TECHNICAL REPORTING
+
+> **OPERATIONAL WARNING**
+> Do not execute any binaries discovered during the hunt on the TARGET-WK01 workstation. Move all samples to the RED ZONE (MALWARE-01) for analysis.
+
+Submit your findings using the **SITREP** format:
+1.  **Persistence Mechanism**: (Registry Path / WMI Filter Name)
+2.  **Payload Location**: (Full path to the malicious binary)
+3.  **Obfuscation Method**: (How was it hidden?)
+4.  **Recommended Countermeasure**: (How would you automate the detection of this across the enterprise?)
+
+---
+
+## 5.0 MISSION COMPLETION CRITERIA
+1.  Identification of the primary persistence mechanism.
+2.  Successful extraction of the malicious payload SHA256 hash.
+3.  Verification that the persistence was successfully analyzed in **Registry Explorer**.

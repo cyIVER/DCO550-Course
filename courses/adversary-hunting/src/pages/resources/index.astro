@@ -2,91 +2,85 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Hunter's Toolbox & Resources">
-    <section class="hero">
-        <div class="container">
-            <div style="font-family: 'Share Tech Mono', monospace; color: var(--accent-green); letter-spacing: 4px; margin-bottom: 20px;">DCO 550 // ARMORY</div>
-            <h1>Hunter's <span class="accent">Toolbox</span></h1>
-            <p style="font-size: 20px; color: var(--text-secondary); max-width: 800px; margin: 20px auto;">
-                Essential tools, code snippets, and datasets for the modern adversary hunter.
-            </p>
-        </div>
-    </section>
-
+<BaseLayout title="Tactical Reference">
     <section class="container" style="padding: 60px 0;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
-            <div>
-                <h2 style="color: var(--accent-green); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 30px;">Digital Forensics</h2>
-                
-                <div class="card">
-                    <h3>Volatility 3 Quick-Start</h3>
-                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 15px;">Analyze memory dumps for hidden processes and code injection.</p>
-                    <code style="display: block; background: #000; padding: 15px; border-radius: 4px; font-size: 12px; color: var(--accent-green);">
-                        python3 vol.py -f mem.raw windows.pslist<br/>
-                        python3 vol.py -f mem.raw windows.malfind
-                    </code>
-                </div>
-
-                <div class="card">
-                    <h3>Plaso (Log2Timeline)</h3>
-                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 15px;">Create a super timeline from various forensic artifacts.</p>
-                    <code style="display: block; background: #000; padding: 15px; border-radius: 4px; font-size: 12px; color: var(--accent-green);">
-                        log2timeline.py --storage-file timeline.plaso /mnt/evidence<br/>
-                        psort.py -o l2tcsv -w timeline.csv timeline.plaso
-                    </code>
-                </div>
-            </div>
-
-            <div>
-                <h2 style="color: var(--accent-blue); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 30px;">Data Science Snippets</h2>
-                
-                <div class="card">
-                    <h3>Calculating Shannon Entropy</h3>
-                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 15px;">Use this to detect obfuscated strings or DGA domains.</p>
-                    <pre style="background: #000; padding: 15px; border-radius: 4px; font-size: 12px; color: var(--accent-blue); overflow-x: auto;">
-import math
-from collections import Counter
-
-def shannon_entropy(data):
-    if not data: return 0
-    entropy = 0
-    for count in Counter(data).values():
-        p = count / len(data)
-        entropy -= p * math.log2(p)
-    return entropy</pre>
-                </div>
-
-                <div class="card">
-                    <h3>Z-Score Outlier Detection</h3>
-                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 15px;">Identify anomalous beaconing behavior in network logs.</p>
-                    <pre style="background: #000; padding: 15px; border-radius: 4px; font-size: 12px; color: var(--accent-blue); overflow-x: auto;">
-import pandas as pd
-
-def find_outliers(df, column):
-    mean = df[column].mean()
-    std = df[column].std()
-    df['z_score'] = (df[column] - mean) / std
-    return df[df['z_score'].abs() > 3]</pre>
-                </div>
+        <div style="border-bottom: 1px solid var(--accent-green); padding-bottom: 10px; margin-bottom: 40px;">
+            <h1 style="font-size: 36px; margin: 0;">Tactical <span class="accent">References</span></h1>
+            <div style="font-family: 'Share Tech Mono', monospace; color: var(--text-secondary); margin-top: 5px;">
+                FIELD MANUAL // REV: 2026.04.16
             </div>
         </div>
 
-        <div style="margin-top: 60px;">
-            <h2 style="color: var(--text-primary); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 30px;">Sample Datasets</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-                <div class="card" style="text-align: center;">
-                    <i class="fa-solid fa-file-csv" style="font-size: 40px; color: var(--accent-green); margin-bottom: 15px;"></i>
-                    <h4>DNS Logs (Noisy)</h4>
-                    <p style="color: var(--text-secondary); font-size: 12px;">Practice ETL and DGA detection.</p>
-                    <a href="#" class="btn" style="padding: 8px 16px; font-size: 12px;">Download .CSV</a>
+        <div style="display: grid; grid-template-columns: 3fr 1fr; gap: 40px;">
+            <!-- Main Content -->
+            <div>
+                <div class="card" style="margin-bottom: 30px;">
+                    <h3 style="color: var(--accent-green); margin-top: 0;">Forensics Command Palette</h3>
+                    <table style="width: 100%; color: var(--text-secondary); font-size: 14px; border-collapse: collapse;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid var(--border); text-align: left;">
+                                <th style="padding: 10px; font-family: 'Share Tech Mono', monospace;">TOOL</th>
+                                <th style="padding: 10px; font-family: 'Share Tech Mono', monospace;">USE CASE</th>
+                                <th style="padding: 10px; font-family: 'Share Tech Mono', monospace;">PRIMARY COMMAND</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: 15px; color: var(--text-primary);">Volatility 3</td>
+                                <td style="padding: 15px;">Analyze Memory</td>
+                                <td style="padding: 15px;"><code style="color: var(--accent-blue);">vol.py -f mem.raw windows.pslist</code></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: 15px; color: var(--text-primary);">Plaso (Log2Timeline)</td>
+                                <td style="padding: 15px;">Artifact Aggregation</td>
+                                <td style="padding: 15px;"><code style="color: var(--accent-blue);">log2timeline.py timeline.plaso /path/to/img</code></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: 15px; color: var(--text-primary);">Pestudio</td>
+                                <td style="padding: 15px;">Static Triage</td>
+                                <td style="padding: 15px;"><code style="color: var(--accent-blue);">pestudio.exe malware.exe</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="card" style="text-align: center;">
-                    <i class="fa-solid fa-file-code" style="font-size: 40px; color: var(--accent-blue); margin-bottom: 15px;"></i>
-                    <h4>Process Creation Events</h4>
-                    <p style="color: var(--text-secondary); font-size: 12px;">Practice parent-child analysis.</p>
-                    <a href="#" class="btn" style="padding: 8px 16px; font-size: 12px; background-color: var(--accent-blue);">Download .JSON</a>
+
+                <div class="card">
+                    <h3 style="color: var(--accent-blue); margin-top: 0;">MITRE ATT&CK Registry Mapping</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div style="padding: 15px; border-left: 2px solid var(--accent-blue); background: rgba(0, 210, 255, 0.05);">
+                            <div style="font-family: 'Share Tech Mono', monospace; font-size: 12px; color: var(--accent-blue);">T1547.001</div>
+                            <div style="font-weight: bold; margin-bottom: 5px;">Registry Run Keys</div>
+                            <div style="font-size: 13px; color: var(--text-secondary);">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run</div>
+                        </div>
+                        <div style="padding: 15px; border-left: 2px solid var(--accent-blue); background: rgba(0, 210, 255, 0.05);">
+                            <div style="font-family: 'Share Tech Mono', monospace; font-size: 12px; color: var(--accent-blue);">T1546.003</div>
+                            <div style="font-weight: bold; margin-bottom: 5px;">WMI Event Subscription</div>
+                            <div style="font-size: 13px; color: var(--text-secondary);">ROOT\subscription:__EventFilter</div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <!-- Sidebar -->
+            <aside>
+                <div style="border: 1px solid var(--accent-gold); padding: 20px; background: rgba(255, 204, 0, 0.05);">
+                    <h4 style="color: var(--accent-gold); margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                        <i class="fa-solid fa-triangle-exclamation"></i> ROE
+                    </h4>
+                    <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 0;">
+                        Operators are reminded to execute all malware samples within the provided sandbox networks ONLY. Telemetry is monitored.
+                    </p>
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <h4 style="color: var(--text-primary);">External Comms</h4>
+                    <ul style="list-style: none; padding: 0; font-size: 13px;">
+                        <li style="margin-bottom: 10px;"><a href="https://attack.mitre.org" target="_blank" style="color: var(--accent-green); text-decoration: none;">[ MITRE ATT&CK ]</a></li>
+                        <li style="margin-bottom: 10px;"><a href="https://gchq.github.io/CyberChef/" target="_blank" style="color: var(--accent-green); text-decoration: none;">[ CyberChef ]</a></li>
+                        <li style="margin-bottom: 10px;"><a href="https://docs.microsoft.com/en-us/sysinternals/" target="_blank" style="color: var(--accent-green); text-decoration: none;">[ Sysinternals ]</a></li>
+                    </ul>
+                </div>
+            </aside>
         </div>
     </section>
 </BaseLayout>

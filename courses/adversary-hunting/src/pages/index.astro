@@ -2,77 +2,117 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Advanced Adversary Hunting">
+<BaseLayout title="Mission Briefing">
     <section class="hero">
         <div class="container">
-            <div style="font-family: 'Share Tech Mono', monospace; color: var(--accent-green); letter-spacing: 4px; margin-bottom: 20px;">DCO 550 // CAPSTONE</div>
-            <h1>Advanced <span class="accent">Adversary Hunting</span><br />& Malware RE</h1>
-            <p style="font-size: 20px; color: var(--text-secondary); max-width: 800px; margin: 20px auto;">
-                A proactive, data-driven course for elite cyber defenders. Master forensic hunting, deep malware analysis, and scalable detection engineering.
+            <div style="font-family: 'Share Tech Mono', monospace; color: var(--accent-gold); letter-spacing: 4px; margin-bottom: 20px;">[ CLASSIFICATION: UNCLASSIFIED // FOUO ]</div>
+            <h1 style="margin-bottom: 10px;">OPERATION <span class="accent">ADVERSARY HUNT</span></h1>
+            <div style="font-family: 'Share Tech Mono', monospace; color: var(--text-secondary); margin-bottom: 30px;">
+                LOCATION: MOONBASE IVERSON // SECTOR: DCO-550
+            </div>
+            <p style="font-size: 18px; color: var(--text-secondary); max-width: 800px; margin: 20px auto; line-height: 1.8;">
+                Welcome, Operator. This course is designed to transition hunt analysts into elite adversary hunters. You will execute advanced host forensics, deep-dive malware reverse engineering, and build data-driven automation to track and neutralize sophisticated threats.
             </p>
-            <a href="#modules" class="btn">Begin Hunt</a>
+            <div style="margin-top: 40px; display: flex; justify-content: center; gap: 20px;">
+                <a href="#briefing" class="btn">View Briefing</a>
+                <a href="/courses/adversary-hunting/syllabus/" class="btn" style="border-color: var(--text-dim); color: var(--text-secondary);">Course Docs</a>
+            </div>
         </div>
     </section>
 
-    <section id="modules" class="container" style="padding: 100px 0;">
-        <h2 style="font-size: 32px; border-bottom: 2px solid var(--border); padding-bottom: 10px; margin-bottom: 40px;">Course Modules</h2>
+    <section id="briefing" class="container" style="padding: 80px 0;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid var(--accent-green); padding-bottom: 10px; margin-bottom: 50px;">
+            <h2 style="font-size: 28px; margin: 0;">Operational Phases</h2>
+            <div style="font-family: 'Share Tech Mono', monospace; color: var(--accent-green); font-size: 14px;">
+                TOTAL PHASES: 04 // STATUS: ACTIVE
+            </div>
+        </div>
         
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
+            <!-- Phase 1 -->
             <div class="card" data-module-card="1">
-                <div style="color: var(--accent-green); font-size: 14px; font-family: 'Share Tech Mono', monospace; margin-bottom: 10px;">MODULE 01</div>
-                <h3>Modern Hunter's Triad</h3>
-                <p style="color: var(--text-secondary); font-size: 14px;">Introduction to the integrated methodology of Forensics, RE, and Data Science.</p>
-                <div class="card-links" style="margin-top: 20px; display: flex; gap: 10px;">
-                    <a href="/courses/adversary-hunting/slides/" style="color: var(--accent-green); text-decoration: none; font-size: 12px; font-weight: bold;">[ BROWSE SLIDES ]</a>
-                    <span style="color: var(--border);">|</span>
-                    <a href="/courses/adversary-hunting/labs/" style="color: var(--accent-green); text-decoration: none; font-size: 12px; font-weight: bold;">[ VIEW LABS ]</a>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                    <div style="color: var(--accent-green); font-family: 'Share Tech Mono', monospace; font-size: 14px;">PHASE 01</div>
+                    <span class="status-tag status-online">Operational</span>
                 </div>
-                <div class="lock-overlay" style="display: none; margin-top: 20px; color: var(--text-secondary); font-size: 12px; font-style: italic;">Locked // Instructor Authorization Required</div>
+                <h3>Hunter's Triad</h3>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 20px;">
+                    Establish the operational environment. Mastering the intersection of Endpoint Forensics, Static Code Analysis, and Data Engineering.
+                </p>
+                <div class="card-links" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <a href="/courses/adversary-hunting/slides/" class="btn" style="font-size: 12px; padding: 8px;">Briefing Slides</a>
+                    <a href="/courses/adversary-hunting/labs/" class="btn" style="font-size: 12px; padding: 8px;">Lab Execution</a>
+                </div>
+                <div class="lock-overlay" style="display: none; padding: 20px; border: 1px dashed var(--accent-red); color: var(--accent-red); text-align: center; font-family: 'Share Tech Mono', monospace;">
+                    <i class="fa-solid fa-triangle-exclamation"></i> ACCESS DENIED<br/>
+                    AUTHORIZATION REQUIRED
+                </div>
             </div>
 
+            <!-- Phase 2 -->
             <div class="card" data-module-card="2">
-                <div style="color: var(--accent-blue); font-size: 14px; font-family: 'Share Tech Mono', monospace; margin-bottom: 10px;">MODULE 02</div>
-                <h3>Advanced Persistence</h3>
-                <p style="color: var(--text-secondary); font-size: 14px;">Hunting for stealthy persistence mechanisms in the Registry and WMI.</p>
-                <div class="card-links" style="margin-top: 20px; display: flex; gap: 10px;">
-                    <a href="/courses/adversary-hunting/slides/" style="color: var(--accent-blue); text-decoration: none; font-size: 12px; font-weight: bold;">[ BROWSE SLIDES ]</a>
-                    <span style="color: var(--border);">|</span>
-                    <a href="/courses/adversary-hunting/labs/" style="color: var(--accent-blue); text-decoration: none; font-size: 12px; font-weight: bold;">[ VIEW LABS ]</a>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                    <div style="color: var(--accent-blue); font-family: 'Share Tech Mono', monospace; font-size: 14px;">PHASE 02</div>
+                    <span class="status-tag status-online">Operational</span>
                 </div>
-                <div class="lock-overlay" style="display: none; margin-top: 20px; color: var(--text-secondary); font-size: 12px; font-style: italic;">Locked // Instructor Authorization Required</div>
+                <h3>Persistence & Memory</h3>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 20px;">
+                    Detecting stealthy persistence mechanisms and analyzing volatile memory for code injection and process hollowing.
+                </p>
+                <div class="card-links" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <a href="/courses/adversary-hunting/slides/" class="btn" style="font-size: 12px; padding: 8px; border-color: var(--accent-blue); color: var(--accent-blue);">Briefing Slides</a>
+                    <a href="/courses/adversary-hunting/labs/" class="btn" style="font-size: 12px; padding: 8px; border-color: var(--accent-blue); color: var(--accent-blue);">Lab Execution</a>
+                </div>
+                <div class="lock-overlay" style="display: none; padding: 20px; border: 1px dashed var(--accent-red); color: var(--accent-red); text-align: center; font-family: 'Share Tech Mono', monospace;">
+                    <i class="fa-solid fa-triangle-exclamation"></i> ACCESS DENIED<br/>
+                    AUTHORIZATION REQUIRED
+                </div>
             </div>
 
+            <!-- Phase 3 -->
             <div class="card" data-module-card="3">
-                <div style="color: var(--accent-blue); font-size: 14px; font-family: 'Share Tech Mono', monospace; margin-bottom: 10px;">MODULE 03</div>
-                <h3>Memory Analysis</h3>
-                <p style="color: var(--text-secondary); font-size: 14px;">Identifying code injection and process hollowing through memory forensics.</p>
-                <div class="card-links" style="margin-top: 20px; display: flex; gap: 10px;">
-                    <a href="/courses/adversary-hunting/slides/" style="color: var(--accent-blue); text-decoration: none; font-size: 12px; font-weight: bold;">[ BROWSE SLIDES ]</a>
-                    <span style="color: var(--border);">|</span>
-                    <a href="/courses/adversary-hunting/labs/" style="color: var(--accent-blue); text-decoration: none; font-size: 12px; font-weight: bold;">[ VIEW LABS ]</a>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                    <div style="color: var(--accent-gold); font-family: 'Share Tech Mono', monospace; font-size: 14px;">PHASE 03</div>
+                    <span class="status-tag status-warning">In Standby</span>
                 </div>
-                <div class="lock-overlay" style="display: none; margin-top: 20px; color: var(--text-secondary); font-size: 12px; font-style: italic;">Locked // Instructor Authorization Required</div>
+                <h3>Automation & Scalability</h3>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 20px;">
+                    Leveraging Python for ETL pipelines and statistical analysis to scale hunt operations across enterprise-grade datasets.
+                </p>
+                <div class="card-links" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <a href="/courses/adversary-hunting/slides/" class="btn" style="font-size: 12px; padding: 8px; border-color: var(--accent-gold); color: var(--accent-gold);">Briefing Slides</a>
+                    <a href="/courses/adversary-hunting/labs/" class="btn" style="font-size: 12px; padding: 8px; border-color: var(--accent-gold); color: var(--accent-gold);">Lab Execution</a>
+                </div>
+                <div class="lock-overlay" style="display: none; padding: 20px; border: 1px dashed var(--accent-red); color: var(--accent-red); text-align: center; font-family: 'Share Tech Mono', monospace;">
+                    <i class="fa-solid fa-triangle-exclamation"></i> ACCESS DENIED<br/>
+                    AUTHORIZATION REQUIRED
+                </div>
             </div>
-        </div>
-    <section class="container" style="padding: 60px 0; border-top: 1px solid var(--border);">
-        <h2 style="font-size: 24px; margin-bottom: 30px;">Quick Access</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-            <a href="/courses/adversary-hunting/resources/" class="card" style="text-decoration: none; text-align: center; padding: 20px; transition: transform 0.2s;">
-                <i class="fa-solid fa-screwdriver-wrench" style="font-size: 32px; color: var(--accent-green); margin-bottom: 10px;"></i>
-                <h4 style="margin: 10px 0 0 0; color: var(--text-primary);">Toolbox</h4>
-            </a>
-            <a href="/courses/adversary-hunting/capstone/" class="card" style="text-decoration: none; text-align: center; padding: 20px; transition: transform 0.2s;">
-                <i class="fa-solid fa-bullseye" style="font-size: 32px; color: var(--accent-blue); margin-bottom: 10px;"></i>
-                <h4 style="margin: 10px 0 0 0; color: var(--text-primary);">Capstone</h4>
-            </a>
-            <a href="/courses/adversary-hunting/instructor/" class="card" style="text-decoration: none; text-align: center; padding: 20px; transition: transform 0.2s;">
-                <i class="fa-solid fa-user-shield" style="font-size: 32px; color: var(--text-secondary); margin-bottom: 10px;"></i>
-                <h4 style="margin: 10px 0 0 0; color: var(--text-primary);">Instructor</h4>
-            </a>
         </div>
     </section>
 
-    <script>
+    <section class="container" style="padding-bottom: 100px;">
+        <div style="background: rgba(0, 210, 255, 0.05); border: 1px solid var(--accent-blue); padding: 40px;">
+            <div style="display: flex; gap: 40px; align-items: center;">
+                <div style="flex: 1;">
+                    <h2 style="color: var(--accent-blue); margin-top: 0;">Final Mission: Capstone</h2>
+                    <p style="color: var(--text-secondary);">
+                        The course culminates in a multi-week, live-fire exercise. You will be dropped into a compromised network and tasked with identifying the adversary, reversing their toolkit, and developing automated countermeasures.
+                    </p>
+                    <a href="/courses/adversary-hunting/capstone/" class="btn" style="border-color: var(--accent-blue); color: var(--accent-blue);">Mission Profile</a>
+                </div>
+                <div style="font-family: 'Share Tech Mono', monospace; color: var(--text-dim); border-left: 1px solid var(--border); padding-left: 40px; font-size: 12px;">
+                    <div style="margin-bottom: 10px;">[ INTEL REPORT ]</div>
+                    <div>THREAT: SOPHISTICATED</div>
+                    <div>SECTOR: FINANCIAL/INFRA</div>
+                    <div>TTPs: UNKNOWN</div>
+                    <div style="margin-top: 20px; color: var(--accent-red);">STATUS: CRITICAL</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script is:inline>
         function applyModuleState() {
             const state = JSON.parse(localStorage.getItem('dco550_module_state')) || {
                 '1': 'unlocked',
@@ -86,22 +126,28 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
                 const links = card.querySelector('.card-links');
                 const overlay = card.querySelector('.lock-overlay');
+                const statusTag = card.querySelector('.status-tag');
 
                 if (state[modId] === 'locked') {
-                    card.style.opacity = '0.6';
+                    card.style.opacity = '0.7';
                     links.style.display = 'none';
                     overlay.style.display = 'block';
+                    if (statusTag) {
+                        statusTag.className = 'status-tag';
+                        statusTag.style.background = 'rgba(255, 62, 62, 0.1)';
+                        statusTag.style.color = 'var(--accent-red)';
+                        statusTag.style.border = '1px solid var(--accent-red)';
+                        statusTag.innerText = 'Unauthorized';
+                    }
                 } else {
                     card.style.opacity = '1';
-                    links.style.display = 'flex';
+                    links.style.display = 'grid';
                     overlay.style.display = 'none';
                 }
             });
         }
 
-        // Apply on load
         window.addEventListener('load', applyModuleState);
-        // Also listen for changes (if open in another tab)
         window.addEventListener('storage', applyModuleState);
     </script>
 </BaseLayout>

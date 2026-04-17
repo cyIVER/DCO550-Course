@@ -10,7 +10,7 @@ The course architecture is built around the "Hunter's Triad" concept, integratin
 
 ## 🏗️ Project Structure
 
-- `courses/adversary-hunting/`: Astro-based web platform serving course modules and syllabus.
+- `courses/adversary-hunting/`: Tactical C2-style mission platform (Astro) with integrated progress tracking, operator checklists, and an instructor C2 dashboard.
 - `infrastructure/`: Enterprise-grade Infrastructure as Code (IaC).
     - `packer/`: Windows 11 Golden Images pre-instrumented with Ghidra, Volatility 3, x64dbg, and more.
     - `terraform/`: Automated Azure provisioning of isolated student cyber ranges (172.16.X.0/24).
@@ -20,6 +20,7 @@ The course architecture is built around the "Hunter's Triad" concept, integratin
 
 ## 🚀 DevSecOps & Deployment
 
+- **Mission Briefing Platform**: A hardened web interface featuring "Operational Phases," "Tactical References," and a persistent "Mission Journal" for student documentation.
 - **Dual-Track CI/CD**: 
     - **Track 1**: Containerized delivery of the course website via GitHub Actions.
     - **Track 2**: Full-stack infrastructure deployment via GitLab CI/CD with corporate proxy support.
@@ -27,5 +28,5 @@ The course architecture is built around the "Hunter's Triad" concept, integratin
 - **Isolated Ranges**: Strict egress filtering to ensure safe malware execution within student-specific subnets.
 
 ---
-**Author**: Iver Iverson
-**Status**: ACTIVE - Development Phase
+**Author**: Iver Iverson  
+**System Status**: NOMINAL // OPERATION ADVERSARY HUNT ACTIVE

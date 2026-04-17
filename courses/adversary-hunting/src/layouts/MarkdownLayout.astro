@@ -3,106 +3,247 @@ import BaseLayout from './BaseLayout.astro';
 const { frontmatter } = Astro.props;
 ---
 <BaseLayout title={frontmatter.title}>
-    <article class="container markdown-content">
-        <slot />
-    </article>
+    <div class="lab-container">
+        <aside class="lab-sidebar">
+            <div class="sidebar-block">
+                <h4>[ MISSION STATUS ]</h4>
+                <div class="status-indicator">
+                    <span class="pulse"></span>
+                    ACTIVE EXECUTION
+                </div>
+            </div>
+
+            <div class="sidebar-block">
+                <h4>[ REQUIREMENTS ]</h4>
+                <ul>
+                    <li><i class="fa-solid fa-check-square"></i> Azure VM Access</li>
+                    <li><i class="fa-solid fa-check-square"></i> Python 3.10+</li>
+                    <li><i class="fa-solid fa-check-square"></i> Volatility 3</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-block">
+                <h4>[ OPERATOR CHECKLIST ]</h4>
+                <div class="checklist">
+                    <label><input type="checkbox" /> Snapshot Reverted</label>
+                    <label><input type="checkbox" /> VPN Tunnel Up</label>
+                    <label><input type="checkbox" /> Telemetry Logging</label>
+                </div>
+            </div>
+
+            <div class="sidebar-block">
+                <h4>[ MISSION JOURNAL ]</h4>
+                <textarea id="mission-notes" placeholder="RECORD IOCS / OBSERVATIONS..." style="width: 100%; height: 150px; background: #000; border: 1px solid var(--border-bright); color: var(--accent-green); font-family: 'Share Tech Mono', monospace; font-size: 11px; padding: 10px; outline: none; resize: none;"></textarea>
+                <div style="font-size: 9px; color: var(--text-dim); margin-top: 5px;">* DATA SAVED LOCALLY TO ENCRYPTED SECTOR</div>
+            </div>
+            <div class="sidebar-block">
+                <h4>[ MISSION ACTIONS ]</h4>
+                <button onclick="window.print()" class="btn" style="width: 100%; font-size: 11px; border-color: var(--accent-blue); color: var(--accent-blue);">[ PRINT MISSION ]</button>
+            </div>
+        </aside>
+
+        <article class="markdown-content">
+            <slot />
+            
+            <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border); display: flex; justify-content: center;">
+                <button id="complete-mission-btn" class="btn" style="border-color: var(--accent-green); color: var(--accent-green);">
+                    [ MARK MISSION COMPLETE ]
+                </button>
+            </div>
+        </article>
+    </div>
+
+    <script is:inline>
+        const btn = document.getElementById('complete-mission-btn');
+        const notesArea = document.getElementById('mission-notes');
+        const labId = window.location.pathname; // Use path as unique ID
+
+        // Persistence for Notes
+        const notesKey = `dco550_notes_${labId}`;
+        notesArea.value = localStorage.getItem(notesKey) || '';
+        notesArea.addEventListener('input', () => {
+            localStorage.setItem(notesKey, notesArea.value);
+        });
+
+        function updateBtnState() {
+            const completed = JSON.parse(localStorage.getItem('dco550_completed_labs')) || [];
+            if (completed.includes(labId)) {
+                btn.textContent = '[ MISSION ACCOMPLISHED ]';
+                btn.style.backgroundColor = 'rgba(0, 255, 65, 0.1)';
+                btn.disabled = true;
+            }
+        }
+
+        btn.addEventListener('click', () => {
+            const completed = JSON.parse(localStorage.getItem('dco550_completed_labs')) || [];
+            if (!completed.includes(labId)) {
+                completed.push(labId);
+                localStorage.setItem('dco550_completed_labs', JSON.stringify(completed));
+                updateBtnState();
+                window.dispatchEvent(new Event('labCompleted'));
+            }
+        });
+
+        updateBtnState();
+    </script>
 </BaseLayout>
 
 <style is:global>
+    .lab-container {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: 40px;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 40px 30px;
+    }
+
+    .lab-sidebar {
+        position: sticky;
+        top: 100px;
+        height: fit-content;
+    }
+
+    .sidebar-block {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .sidebar-block h4 {
+        color: var(--accent-green);
+        font-size: 14px;
+        margin-top: 0;
+        margin-bottom: 15px;
+        font-family: 'Share Tech Mono', monospace;
+    }
+
+    .sidebar-block ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 12px;
+        color: var(--text-secondary);
+    }
+
+    .sidebar-block li {
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .checklist label {
+        display: block;
+        font-size: 12px;
+        color: var(--text-secondary);
+        margin-bottom: 8px;
+        cursor: pointer;
+    }
+
+    .status-indicator {
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 12px;
+        color: var(--accent-green);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .pulse {
+        width: 8px;
+        height: 8px;
+        background-color: var(--accent-green);
+        border-radius: 50%;
+        display: inline-block;
+        box-shadow: 0 0 5px var(--accent-green);
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% { opacity: 1; }
+        50% { opacity: 0.3; }
+        100% { opacity: 1; }
+    }
+
     .markdown-content {
-        padding: 80px 20px;
-        max-width: 900px;
+        background: var(--bg-surface);
+        padding: 60px;
+        border: 1px solid var(--border);
     }
 
     .markdown-content h1 {
-        font-size: 48px;
-        border-bottom: 2px solid var(--border);
+        font-size: 42px;
+        border-bottom: 1px solid var(--accent-green);
         padding-bottom: 10px;
+        margin-top: 0;
         margin-bottom: 40px;
         color: var(--accent-green);
     }
 
     .markdown-content h2 {
-        font-size: 32px;
-        margin-top: 50px;
-        border-bottom: 1px solid var(--border);
-        padding-bottom: 5px;
-    }
-
-    .markdown-content h3 {
-        font-size: 24px;
-        margin-top: 30px;
-        color: var(--accent-blue);
+        font-size: 28px;
+        margin-top: 40px;
+        color: var(--text-primary);
+        font-family: 'Rajdhani', sans-serif;
     }
 
     .markdown-content p {
-        font-size: 18px;
+        font-size: 17px;
         color: var(--text-secondary);
         margin-bottom: 20px;
-    }
-
-    .markdown-content ul, .markdown-content ol {
-        margin-bottom: 30px;
-        padding-left: 20px;
-    }
-
-    .markdown-content li {
-        margin-bottom: 10px;
-        color: var(--text-secondary);
-    }
-
-    .markdown-content table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 40px 0;
-        background-color: var(--bg-surface);
-        border: 1px solid var(--border);
-    }
-
-    .markdown-content th {
-        background-color: rgba(34, 197, 94, 0.1);
-        color: var(--accent-green);
-        text-align: left;
-        padding: 15px;
-        font-family: 'Rajdhani', sans-serif;
-        text-transform: uppercase;
-    }
-
-    .markdown-content td {
-        padding: 15px;
-        border-bottom: 1px solid var(--border);
-        color: var(--text-secondary);
-        font-size: 14px;
     }
 
     .markdown-content code {
         background-color: #020617;
         padding: 2px 6px;
-        border-radius: 4px;
+        border: 1px solid var(--border-bright);
+        color: var(--accent-blue);
         font-family: 'Share Tech Mono', monospace;
-        color: var(--accent-green);
     }
 
     .markdown-content pre {
         background-color: #020617;
-        padding: 20px;
-        border-radius: 8px;
+        padding: 25px;
         border: 1px solid var(--border);
-        overflow-x: auto;
         margin: 30px 0;
+        position: relative;
     }
 
-    .markdown-content pre code {
-        background-color: transparent;
-        padding: 0;
-        color: #e2e8f0;
+    .markdown-content pre::before {
+        content: "TERMINAL_OUTPUT";
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: var(--border);
+        color: var(--text-dim);
+        font-size: 10px;
+        padding: 2px 8px;
+        font-family: 'Share Tech Mono', monospace;
     }
 
+    /* Custom Alerts for Markdown */
     .markdown-content blockquote {
-        border-left: 4px solid var(--accent-green);
-        background-color: rgba(34, 197, 94, 0.05);
+        border: 1px solid var(--accent-gold);
+        background: rgba(255, 204, 0, 0.05);
         padding: 20px;
         margin: 30px 0;
-        font-style: italic;
+        color: var(--text-secondary);
+    }
+
+    .markdown-content blockquote p {
+        margin: 0;
+        font-style: normal;
+    }
+
+    .markdown-content blockquote::before {
+        content: "OPERATIONAL WARNING";
+        display: block;
+        font-family: 'Share Tech Mono', monospace;
+        color: var(--accent-gold);
+        font-size: 12px;
+        margin-bottom: 10px;
+        font-weight: bold;
     }
 </style>

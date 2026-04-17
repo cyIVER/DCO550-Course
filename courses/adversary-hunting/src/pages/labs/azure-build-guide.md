@@ -1,84 +1,71 @@
 ---
 layout: ../../layouts/MarkdownLayout.astro
-title: "Lab 1: Azure Cyber Range Build Guide"
+title: "Mission 01: Establishing the Beachhead"
 ---
 
-## 1.0 Objective
+# MISSION 01: Establishing the Beachhead (Azure Cyber Range Build)
 
-The objective of this guide is to construct a secure, isolated, and reproducible cloud-native cyber range within Microsoft Azure. This environment will serve as the foundation for all hands-on labs in DCO 550, providing a realistic and safe platform to analyze malware and hunt for advanced adversaries. By the end of this guide, you will have deployed a multi-tier virtual network containing forensics, malware analysis, and victim virtual machines, all governed by strict network security rules.
-
-## 2.0 Architectural Overview
-
-We will build a single Virtual Network (VNet) segmented into three distinct subnets, each with its own Network Security Group (NSG) acting as a firewall. This architecture is crucial for isolating our analysis and victim machines.
-
-- **Analysis Subnet (`10.55.1.0/24`)**: The "clean" zone for our forensics and management VM.
-- **Victim Subnet (`10.55.10.0/24`)**: The simulated corporate network where our target machines reside. Outbound internet access is **Denied**.
-- **Malware Subnet (`10.55.20.0/24`)**: A high-security "blast chamber" for running and analyzing malware. **Denies all traffic in and out by default.**
+## 1.0 MISSION OBJECTIVE
+Establish a secure, isolated, and reproducible tactical cyber range within Microsoft Azure. This environment is your **Area of Operations (AO)** for all hands-on exercises in Operation Adversary Hunt. Success is defined by the verified deployment of a multi-tier virtual network with strict egress controls and forensics-ready workstations.
 
 ---
 
-## 3.0 Automated Deployment (Recommended)
+## 2.0 INTEL: ARCHITECTURAL OVERVIEW
+The tactical range utilizes a single Virtual Network (VNet) segmented into three distinct zones of control:
 
-We provide a Bicep template to automate the creation of the Resource Group, VNet, Subnets, and NSGs with the correct security rules.
+*   **GREEN ZONE // Analysis (`10.55.1.0/24`)**: Clean zone for forensics and command VMs.
+*   **YELLOW ZONE // Victim (`10.55.10.0/24`)**: Simulated target network. **INTERNET EGRESS: DENIED.**
+*   **RED ZONE // Malware (`10.55.20.0/24`)**: High-security blast chamber for live-fire RE. **TOTAL ISOLATION.**
 
-### Deployment via Azure CLI:
+---
+
+## 3.0 EXECUTION: DEPLOYMENT PHASES
+
+### PHASE 1: Infrastructure as Code
+Deploy the foundational network using the provided Bicep template.
+
 ```bash
-# Login to Azure
+# Authenticate to C2
 az login
 
-# Create the Resource Group
-az group create --name CYS550-Lab-RG --location eastus2
+# Establish Resource Group
+az group create --name DCO550-AO --location eastus
 
-# Deploy the Infrastructure
-az deployment group create --resource-group CYS550-Lab-RG --template-file ./infrastructure/main.bicep
+# Deploy Network Infrastructure
+az deployment group create --resource-group DCO550-AO --template-file ./infrastructure/main.bicep
 ```
 
----
+### PHASE 2: Provisioning Assets
+Ensure the following tactical assets are provisioned and responding to ICMP:
 
-## 4.0 Step-by-Step Deployment Instructions
-
-Follow these phases in order. All resources must be created in the **same region** (e.g., `East US 2`).
-
-### Phase 1: Foundational Infrastructure
-
-1.  **Create Resource Group**: `CYS550-Lab-RG`
-2.  **Create Virtual Network**: `CYS550-VNet` (Address space: `10.55.0.0/16`)
-3.  **Define Subnets**:
-    | Name | Address range |
-    | :--- | :--- |
-    | `Analysis-Subnet` | `10.55.1.0/24` |
-    | `Victim-Subnet` | `10.55.10.0/24` |
-    | `Malware-Subnet` | `10.55.20.0/24` |
-
-### Phase 2: Network Security Controls
-
-1.  **Create Network Security Groups (NSGs)**: `Analysis-NSG`, `Victim-NSG`, `Malware-NSG`.
-2.  **Configure Victim-NSG**: Add outbound rule `Deny-Internet-Outbound` (Priority 400).
-3.  **Configure Malware-NSG**: Add outbound rule `Deny-All-Outbound` (Priority 400).
-
-### Phase 3: Virtual Machine Deployment
-
-| VM Name | Image | Subnet | Size |
+| ASSET | SPEC | ZONE | PURPOSE |
 | :--- | :--- | :--- | :--- |
-| `Analysis-VM` | Ubuntu Server 20.04 LTS | Analysis | `Standard_D4s_v3` |
-| `Malware-VM` | Windows 10 Pro | Malware | `Standard_D4s_v3` |
-| `DC01` | Win Server 2019 | Victim | `Standard_D2s_v3` |
-| `WKSTN-01` | Windows 10 Pro | Victim | `Standard_D2s_v3` |
-
-### Phase 4: Post-Deployment Configuration
-
-1.  **Configure Analysis-VM**:
-    ```bash
-    sudo apt-get update && sudo apt-get upgrade -y
-    sudo apt-get install -y git python3-pip
-    pip3 install volatility3 pandas numpy scikit-learn
-    ```
-2.  **Configure Malware-VM**: Temporarily allow outbound traffic to install **Flare-VM**, then immediately revert to **Deny**.
-3.  **Configure Victim Network**: Promote `DC01` to a domain controller for `adversary.local` and join `WKSTN-01` to the domain.
+| **HUNTER-01** | Win 11 Pro | Analysis | Forensics Workstation |
+| **MALWARE-01** | Win 10 (Air-Gapped) | Malware | Reverse Engineering Lab |
+| **TARGET-DC** | Win Server 2022 | Victim | Domain Controller |
+| **TARGET-WK01** | Win 11 Pro | Victim | Compromised Endpoint |
 
 ---
 
-## 5.0 Operational Procedures
+## 4.0 OPERATIONAL READINESS CHECK (ORC)
 
-*   **COST MANAGEMENT**: Stop and **Deallocate** VMs when not in use.
-*   **DATA TRANSFER**: Never move malware to your host machine. Use the `Analysis-VM` as a bridge.
+> **OPERATIONAL WARNING**
+> Failure to verify the "Victim" zone's internet isolation can result in unintended C2 beaconing to the public internet during later labs. Do not proceed until isolation is confirmed.
+
+### Check 1: Egress Verification
+From **TARGET-WK01**, attempt to ping `8.8.8.8`.
+*   **Expected Result:** `Request timed out` (Isolation Confirmed).
+
+### Check 2: Tooling Baseline
+From **HUNTER-01**, verify the presence of the following binaries:
+*   `vol.py` (Volatility 3)
+*   `ghidraRun` (Ghidra 11.x)
+*   `pestudio.exe`
+
+---
+
+## 5.0 MISSION COMPLETION CRITERIA
+1.  Resource Group `DCO550-AO` is active.
+2.  All 4 VMs are in a "Running" state.
+3.  Victim subnet isolation verified via ping failure.
+4.  Submit your `az resource list --output table` output to the instructor for phase sign-off.

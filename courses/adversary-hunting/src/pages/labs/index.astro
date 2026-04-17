@@ -2,49 +2,87 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Hands-on Labs">
+<BaseLayout title="Mission Control">
     <section class="hero">
         <div class="container">
-            <div style="font-family: 'Share Tech Mono', monospace; color: var(--accent-green); letter-spacing: 4px; margin-bottom: 20px;">DCO 550 // TRAINING GROUNDS</div>
-            <h1>Cyber Range <span class="accent">Labs</span></h1>
-            <p style="font-size: 20px; color: var(--text-secondary); max-width: 800px; margin: 20px auto;">
-                Step-by-step technical guides for deploying infrastructure and performing advanced adversary hunts.
+            <div style="font-family: 'Share Tech Mono', monospace; color: var(--accent-gold); letter-spacing: 4px; margin-bottom: 20px;">[ SECTOR: TRAINING GROUNDS // DCO-550 ]</div>
+            <h1>MISSION <span class="accent">CONTROL</span></h1>
+            <p style="font-size: 18px; color: var(--text-secondary); max-width: 800px; margin: 20px auto;">
+                Select an operational phase to begin. Ensure your C2 uplink is stable before executing live-fire exercises.
             </p>
         </div>
     </section>
 
     <section class="container" style="padding: 60px 0;">
-        <div class="card">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <div>
-                    <div style="color: var(--accent-green); font-size: 14px; font-family: 'Share Tech Mono', monospace; margin-bottom: 10px;">LAB 01 // FOUNDATION</div>
-                    <h2 style="margin: 0 0 10px 0;">Azure Cyber Range Build Guide</h2>
-                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Deploy a multi-tier isolated VNet with forensics, malware RE, and victim systems.</p>
-                    <div style="display: flex; gap: 15px;">
-                        <a href="/courses/adversary-hunting/labs/azure-build-guide/" class="btn" style="margin-top: 0;">Read Guide</a>
-                        <a href="/courses/adversary-hunting/labs/infrastructure/main.bicep" download style="color: var(--accent-green); text-decoration: none; font-size: 14px; align-self: center; font-weight: bold;">[ DOWNLOAD BICEP ]</a>
+        <div style="display: grid; grid-template-columns: 1fr; gap: 30px;">
+            <!-- Mission 1 -->
+            <div class="card mission-card" data-lab-id="/courses/adversary-hunting/labs/azure-build-guide/">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div>
+                        <div style="color: var(--accent-green); font-size: 14px; font-family: 'Share Tech Mono', monospace; margin-bottom: 10px;">MISSION 01 // FOUNDATION</div>
+                        <h2 style="margin: 0 0 10px 0;">Establishing the Beachhead</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 15px;">Deploy a multi-tier isolated VNet with forensics, malware RE, and victim systems.</p>
+                        <div style="display: flex; gap: 15px;">
+                            <a href="/courses/adversary-hunting/labs/azure-build-guide/" class="btn" style="margin-top: 0; font-size: 12px;">Execute Mission</a>
+                            <a href="/courses/adversary-hunting/labs/infrastructure/main.bicep" download style="color: var(--accent-green); text-decoration: none; font-size: 12px; align-self: center; font-family: 'Share Tech Mono', monospace;">[ GET_BICEP_CONFIG ]</a>
+                        </div>
                     </div>
-                </div>
-                <div style="text-align: right;">
-                    <span style="background: rgba(34, 197, 94, 0.1); color: var(--accent-green); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold;">AVAILABLE</span>
+                    <div class="mission-status">
+                        <span class="status-tag status-online">Operational</span>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="card">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <div>
-                    <div style="color: var(--accent-blue); font-size: 14px; font-family: 'Share Tech Mono', monospace; margin-bottom: 10px;">LAB 02 // PERSISTENCE</div>
-                    <h2 style="margin: 0 0 10px 0;">Hunting the Shadow Registry</h2>
-                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Locate and analyze hidden registry keys used for boot-time persistence.</p>
-                    <div style="display: flex; gap: 15px;">
-                        <a href="/courses/adversary-hunting/labs/hunting-the-shadow-registry/" class="btn" style="margin-top: 0; background-color: var(--accent-blue);">Read Guide</a>
+            <!-- Mission 2 -->
+            <div class="card mission-card" data-lab-id="/courses/adversary-hunting/labs/hunting-the-shadow-registry/">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div>
+                        <div style="color: var(--accent-blue); font-size: 14px; font-family: 'Share Tech Mono', monospace; margin-bottom: 10px;">MISSION 02 // PERSISTENCE</div>
+                        <h2 style="margin: 0 0 10px 0;">Shadow Persistence</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 15px;">Locate and analyze hidden registry keys used for boot-time persistence.</p>
+                        <div style="display: flex; gap: 15px;">
+                            <a href="/courses/adversary-hunting/labs/hunting-the-shadow-registry/" class="btn" style="margin-top: 0; font-size: 12px; border-color: var(--accent-blue); color: var(--accent-blue);">Execute Mission</a>
+                        </div>
+                    </div>
+                    <div class="mission-status">
+                        <span class="status-tag status-online">Operational</span>
                     </div>
                 </div>
-                <div style="text-align: right;">
-                    <span style="background: rgba(59, 130, 246, 0.1); color: var(--accent-blue); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold;">AVAILABLE</span>
+            </div>
+
+            <!-- Mission 3 -->
+            <div class="card mission-card" data-lab-id="/courses/adversary-hunting/labs/memory-analysis-hunt/">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div>
+                        <div style="color: var(--accent-blue); font-size: 14px; font-family: 'Share Tech Mono', monospace; margin-bottom: 10px;">MISSION 03 // VOLATILE_INTEL</div>
+                        <h2 style="margin: 0 0 10px 0;">Volatile Intel</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 15px;">Analyze physical memory captures to identify code injection and process hollowing.</p>
+                        <div style="display: flex; gap: 15px;">
+                            <a href="/courses/adversary-hunting/labs/memory-analysis-hunt/" class="btn" style="margin-top: 0; font-size: 12px; border-color: var(--accent-blue); color: var(--accent-blue);">Execute Mission</a>
+                        </div>
+                    </div>
+                    <div class="mission-status">
+                        <span class="status-tag status-online">Operational</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <script is:inline>
+        function updateMissionStatus() {
+            const completed = JSON.parse(localStorage.getItem('dco550_completed_labs')) || [];
+            document.querySelectorAll('.mission-card').forEach(card => {
+                const labId = card.getAttribute('data-lab-id');
+                const statusContainer = card.querySelector('.mission-status');
+                
+                if (completed.includes(labId)) {
+                    statusContainer.innerHTML = '<span class="status-tag" style="background: rgba(0, 255, 65, 0.1); color: var(--accent-green); border: 1px solid var(--accent-green);">[ ACCOMPLISHED ]</span>';
+                    card.style.borderColor = 'var(--accent-green)';
+                    card.style.background = 'rgba(0, 255, 65, 0.02)';
+                }
+            });
+        }
+        window.addEventListener('load', updateMissionStatus);
+    </script>
 </BaseLayout>

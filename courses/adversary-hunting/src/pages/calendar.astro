@@ -1,0 +1,169 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Operational Timeline">
+    <section class="hero">
+        <div class="container">
+            <div style="font-family: 'Share Tech Mono', monospace; color: var(--accent-gold); letter-spacing: 4px; margin-bottom: 20px;">[ SECTOR: TIMELINE // DCO-550 ]</div>
+            <h1>MISSION <span class="accent">TIMELINE</span></h1>
+            <p style="font-size: 18px; color: var(--text-secondary); max-width: 800px; margin: 20px auto;">
+                Strategic roadmap for Operation Adversary Hunt. Monitor mission milestones, training briefings, and deliverable suspenses.
+            </p>
+        </div>
+    </section>
+
+    <section class="container" style="padding: 60px 0;">
+        <div style="display: grid; grid-template-columns: 3fr 1fr; gap: 40px;">
+            <!-- Timeline -->
+            <div>
+                <div style="border-left: 2px solid var(--border); padding-left: 30px; margin-left: 10px;">
+                    <!-- Month 1 -->
+                    <div style="position: relative; margin-bottom: 50px;">
+                        <div style="position: absolute; left: -41px; top: 0; width: 20px; height: 20px; background: var(--bg-dark); border: 2px solid var(--accent-green); border-radius: 50%;"></div>
+                        <h3 style="color: var(--accent-green); margin-top: 0;">MONTH 01: FOUNDATIONS</h3>
+                        
+                        <div class="timeline-item">
+                            <div class="week-tag">WEEK 01</div>
+                            <div class="content">
+                                <strong>Mission 01 Assigned</strong>: Establishing the Beachhead (Azure Build).
+                                <div style="font-size: 12px; color: var(--text-dim); margin-top: 5px;">BRIEFING: The Modern Hunter's Triad</div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item highlight">
+                            <div class="week-tag" style="background: var(--accent-red); color: #000;">WEEK 02</div>
+                            <div class="content">
+                                <strong>SUSPENSE: Mission 01 Deliverables Due</strong>.
+                                <div style="margin-top: 5px;">Mission 02 Assigned: Shadow Persistence.</div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="week-tag">WEEK 03</div>
+                            <div class="content">
+                                <strong>SUSPENSE: Mission 02 Deliverables Due</strong>.
+                                <div style="margin-top: 5px;">Mission 03 Assigned: Volatile Intel (Memory Forensics).</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Month 2 -->
+                    <div style="position: relative; margin-bottom: 50px;">
+                        <div style="position: absolute; left: -41px; top: 0; width: 20px; height: 20px; background: var(--bg-dark); border: 2px solid var(--accent-blue); border-radius: 50%;"></div>
+                        <h3 style="color: var(--accent-blue); margin-top: 0;">MONTH 02: DATA SCIENCE & AUTOMATION</h3>
+                        
+                        <div class="timeline-item">
+                            <div class="week-tag">WEEK 05</div>
+                            <div class="content">
+                                <strong>Mission 05 Assigned</strong>: Data Engineering for the Hunt (Python ETL).
+                            </div>
+                        </div>
+
+                        <div class="timeline-item highlight" style="border-color: var(--accent-gold);">
+                            <div class="week-tag" style="background: var(--accent-gold); color: #000;">WEEK 08</div>
+                            <div class="content">
+                                <strong>MIDTERM EVALUATION</strong>: Practical Multi-Part Exam (GCFA/GREM Focus).
+                                <div style="margin-top: 5px; color: var(--accent-gold);">[ CAPSTONE SCENARIO RELEASED ]</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Month 4 -->
+                    <div style="position: relative;">
+                        <div style="position: absolute; left: -41px; top: 0; width: 20px; height: 20px; background: var(--bg-dark); border: 2px solid var(--accent-red); border-radius: 50%;"></div>
+                        <h3 style="color: var(--accent-red); margin-top: 0;">MONTH 04: FINAL ENGAGEMENT</h3>
+                        
+                        <div class="timeline-item">
+                            <div class="week-tag">WEEK 13-15</div>
+                            <div class="content">
+                                <strong>Capstone Workshops</strong>: Deep dive reversing and automated hunt finalization.
+                            </div>
+                        </div>
+
+                        <div class="timeline-item highlight" style="border-color: var(--accent-red);">
+                            <div class="week-tag" style="background: var(--accent-red); color: #000;">WEEK 16</div>
+                            <div class="content">
+                                <strong>FINAL MISSION PRESENTATIONS</strong>.
+                                <div style="margin-top: 5px;">Final Report & Automated Countermeasure Code Due.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Textbooks -->
+            <aside>
+                <div class="card" style="border-color: var(--accent-blue);">
+                    <h4 style="color: var(--accent-blue); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px;">[ REQUIRED MANUALS ]</h4>
+                    
+                    <div class="manual-item">
+                        <div class="title">Practical Malware Analysis (PMA)</div>
+                        <a href="https://nostarch.com/malware" target="_blank" class="manual-link">[ ACCESS PDF ]</a>
+                    </div>
+
+                    <div class="manual-item">
+                        <div class="title">Art of Memory Forensics (AMF)</div>
+                        <a href="https://www.wiley.com/en-us/The+Art+of+Memory+Forensics%3A+Detecting+Malware+and+Threats+in+Windows%2C+Linux%2C+and+Mac+Memory-p-9781118825099" target="_blank" class="manual-link">[ ACCESS PDF ]</a>
+                    </div>
+
+                    <div class="manual-item">
+                        <div class="title">Data-Driven Security</div>
+                        <a href="#" class="manual-link">[ ACCESS PDF ]</a>
+                    </div>
+
+                    <div class="manual-item">
+                        <div class="title">Python for Data Analysis</div>
+                        <a href="#" class="manual-link">[ ACCESS PDF ]</a>
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 10px; background: rgba(0, 210, 255, 0.05); border: 1px dashed var(--accent-blue); font-size: 11px; color: var(--text-secondary);">
+                        * ALL MANUALS ARE SUBJECT TO FOUO HANDLING PROCEDURES IF CONTAINING LOCAL IOCS.
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+    .timeline-item {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        padding: 20px;
+        margin-bottom: 20px;
+        position: relative;
+    }
+    .timeline-item.highlight {
+        border-color: var(--accent-red);
+        background: rgba(255, 62, 62, 0.02);
+    }
+    .week-tag {
+        position: absolute;
+        top: -10px;
+        left: 20px;
+        background: var(--border);
+        color: var(--text-primary);
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 10px;
+        padding: 2px 8px;
+        font-weight: bold;
+    }
+    .manual-item {
+        margin-bottom: 20px;
+    }
+    .manual-item .title {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    .manual-link {
+        color: var(--accent-blue);
+        text-decoration: none;
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 12px;
+    }
+    .manual-link:hover {
+        text-decoration: underline;
+    }
+</style>
