@@ -1,7 +1,9 @@
 # Business Case: DCO 550 - Advanced Adversary Hunting & Malware RE
 
 ## 1. Executive Summary
-This document outlines the resource requirements, financial projections, and security considerations for **DCO 550: Advanced Adversary Hunting & Malware Reverse Engineering**. To deliver a high-fidelity, enterprise-grade training experience, the course requires a dedicated Azure-based cyber range, specialized forensic software, and specific network policy exceptions to handle live malware samples safely.
+This document outlines the resource requirements, financial projections, and security considerations for **DCO 550: Advanced Adversary Hunting & Malware Reverse Engineering**. 
+
+The course is structured as a **16-week semester**, consisting of two 1.5-hour instructional blocks per week (Tuesdays/Thursdays). To deliver this high-fidelity training experience for a maximum of **12 students per cohort**, the course requires a dedicated Azure-based cyber range, specialized forensic software, and specific network policy exceptions to handle live malware samples safely.
 
 ## 2. Strategic Alignment
 DCO 550 aligns with corporate objectives to mature our internal threat hunting capabilities and improve incident response dwell times. By adopting the **Modern Hunter's Triad** (Forensics, RE, and Data Science), we ensure our personnel are equipped with the skills to identify advanced persistent threats (APTs) that bypass traditional signature-based defenses.
@@ -9,15 +11,16 @@ DCO 550 aligns with corporate objectives to mature our internal threat hunting c
 ## 3. Resource Requirements
 
 ### 3.1 Financial Projections (Cloud Infrastructure)
-*Estimated for a class of 20 students over a 5-day intensive period.*
+*Estimated for a 16-week semester (2 x 1.5hr sessions/week) for 12 students.*
+*Cost assumes automated deallocation of VMs outside of class/lab hours.*
 
-| Item | Description | Estimated Cost (Total) |
+| Item | Description | Estimated Cost (Semester) |
 | :--- | :--- | :--- |
-| **Azure Compute** | 80 VMs (4 per student) using D-Series v3 instances. | $3,500 - $4,200 |
-| **Storage** | Premium SSDs for forensic image analysis. | $600 - $800 |
-| **Sentinel Ingestion** | 100GB total telemetry ingestion for KQL hunting labs. | $400 - $600 |
-| **GCP/Azure Web App** | Hosting for Track 1 Course Materials. | $50 - $100 |
-| **Total Class Budget** | | **$4,550 - $5,700** |
+| **Azure Compute** | 48 VMs (4 per student). Dynamic scaling/scheduled shutdown. | $1,800 - $2,400 |
+| **Storage** | Managed Disks (Persistent across 16 weeks). | $1,200 - $1,500 |
+| **Sentinel Ingestion** | Lab telemetry for 32 instructional sessions. | $300 - $500 |
+| **Track 1 Hosting** | Persistent Course Website. | $200 - $300 |
+| **Total Semester Budget** | | **$3,500 - $4,700** |
 
 ### 3.2 Software & Licensing
 *   **Operating Systems**: Windows 11 Enterprise & Windows Server 2022 (Azure Gallery Images).
@@ -25,10 +28,10 @@ DCO 550 aligns with corporate objectives to mature our internal threat hunting c
 *   **RE Toolset**: Ghidra, x64dbg, Volatility 3, Plaso (Open-source/No-cost).
 *   **Data Science**: Python 3.12, Pandas, MSTICPy (Open-source/No-cost).
 
-### 3.3 Personnel
-*   **Primary Instructor**: Subject Matter Expert (SME) in Malware/Forensics.
-*   **Cloud Architect (0.25 FTE)**: Infrastructure maintenance and CI/CD orchestration.
-*   **Lab Assistant (0.5 FTE)**: Real-time student support during technical exercises.
+### 3.3 Personnel & Sustainment Model
+*   **Sustainment Team**: **Internal Hunt Team Personnel**.
+*   **Role**: The Hunt Team will act as both SMEs and Infrastructure Maintainers. This ensures the course content evolves alongside current real-world threats encountered by the team.
+*   **Commitment**: ~4 hours/week per designated Hunt Team member for lab maintenance and instructional support.
 
 ## 4. Operational & Network Policy Exceptions
 Due to the nature of malware analysis, the following exceptions to standard corporate IT policy are requested for the **DCO 550 Azure Environment**:
