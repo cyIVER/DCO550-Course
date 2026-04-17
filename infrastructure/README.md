@@ -11,6 +11,7 @@ This directory contains the automation and configuration code for the DCO 550 Cy
 ## Usage
 
 ### 1. Build Golden Images
+
 ```bash
 cd packer
 packer init .
@@ -18,6 +19,7 @@ packer build .
 ```
 
 ### 2. Provision Cyber Range
+
 ```bash
 cd terraform
 terraform init
