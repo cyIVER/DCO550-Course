@@ -34,6 +34,45 @@
         .nav-btn:hover { transform: scale(1.2); }
         .slide-container { display: none; }
         .slide-container.active { display: flex; }
+        .mock-window {
+            width: 100%;
+            height: 440px;
+            background: #020617;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            position: relative;
+        }
+        .mock-header {
+            background: #1e293b;
+            padding: 8px 15px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 14px;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+        }
+        .mock-header::before {
+            content: '•••';
+            letter-spacing: 2px;
+            color: #475569;
+            margin-right: 15px;
+            font-size: 18px;
+            line-height: 1;
+        }
+        .mock-content {
+            flex: 1;
+            overflow: auto;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+            padding: 20px;
+            color: #e2e8f0;
+        }
     </style>
 </head>
 <body>
@@ -69,9 +108,36 @@
                     </div>
                 </div>
                 <div>
-                    <div class="image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1551808525-51a94da548ce?auto=format&fit=crop&w=800&q=80" alt="Cyber security dashboard triage analyst">
-                    </div>
+                    <div class="mock-window" style="height: 380px;">
+                                            <div class="mock-header">SOC Dashboard - Live Triage</div>
+                                            <div class="mock-content" style="display: flex; gap: 15px; padding: 15px;">
+                                                <div style="flex: 2; display: flex; flex-direction: column; gap: 15px;">
+                                                    <div style="background: #0f172a; border: 1px solid #1e293b; border-radius: 4px; padding: 10px;">
+                                                        <div style="color: #94a3b8;">Alerts by Severity</div>
+                                                        <div style="color: #ef4444; font-size: 24px; font-weight: bold;">Critical: 3</div>
+                                                        <div style="color: #facc15;">High: 12</div>
+                                                    </div>
+                                                    <div style="background: #0f172a; border: 1px solid #1e293b; border-radius: 4px; padding: 10px; flex-grow: 1;">
+                                                        <div style="color: #94a3b8;">Recent Activity</div>
+                                                        <div style="color: #cbd5e1; font-size: 11px;">
+                                                            [14:20] <span style="color: #ef4444;">[!]</span> Unusual logon: WKSTN-103<br>
+                                                            [14:19] <span style="color: #60a5fa;">[i]</span> New process: powershell.exe<br>
+                                                            [14:18] <span style="color: #60a5fa;">[i]</span> Network conn: 10.1.1.5 -> evil.com
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="flex: 3; background: #0f172a; border: 1px solid #1e293b; border-radius: 4px; padding: 10px;">
+                                                    <div style="color: #94a3b8;">Network Traffic (GB)</div>
+                                                    <div style="display: flex; align-items: flex-end; height: 80%; gap: 5px; border-bottom: 1px solid #334155;">
+                                                        <div style="width: 15%; background: #3b82f6; height: 40%;"></div>
+                                                        <div style="width: 15%; background: #3b82f6; height: 60%;"></div>
+                                                        <div style="width: 15%; background: #ef4444; height: 90%;"></div>
+                                                        <div style="width: 15%; background: #3b82f6; height: 70%;"></div>
+                                                        <div style="width: 15%; background: #3b82f6; height: 50%;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                 </div>
             </div>
         </div>
@@ -173,9 +239,30 @@
         <div class="content-area">
             <div class="two-column">
                 <div>
-                    <div class="image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=800&q=80" alt="Code pipeline data engineering">
-                    </div>
+                    <div class="mock-window" style="height: 380px;">
+                                            <div class="mock-header">Data Pipeline: process_logs.py</div>
+                                            <div class="mock-content" style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 20px;">
+                                                <div style="text-align: center;">
+                                                    <i class="fa-solid fa-database" style="font-size: 40px; color: #60a5fa;"></i>
+                                                    <p>Ingest Logs</p>
+                                                </div>
+                                                <i class="fa-solid fa-arrow-right-long" style="font-size: 24px; color: #475569;"></i>
+                                                <div style="text-align: center;">
+                                                    <i class="fa-solid fa-gears" style="font-size: 40px; color: #facc15;"></i>
+                                                    <p>Parse & Enrich</p>
+                                                </div>
+                                                <i class="fa-solid fa-arrow-right-long" style="font-size: 24px; color: #475569;"></i>
+                                                <div style="text-align: center;">
+                                                    <i class="fa-solid fa-chart-line" style="font-size: 40px; color: #4ade80;"></i>
+                                                    <p>Find Anomalies</p>
+                                                </div>
+                                                <i class="fa-solid fa-arrow-right-long" style="font-size: 24px; color: #475569;"></i>
+                                                <div style="text-align: center;">
+                                                    <i class="fa-solid fa-bell" style="font-size: 40px; color: #ef4444;"></i>
+                                                    <p>Generate Alert</p>
+                                                </div>
+                                            </div>
+                                        </div>
                 </div>
                 <div>
                     <ul>
@@ -267,9 +354,31 @@
                     </div>
                 </div>
                 <div>
-                    <div class="image-wrapper" style="border-color: #22c55e; border-width: 2px;">
-                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80" alt="Azure cloud architecture servers">
-                    </div>
+                    <div class="mock-window" style="height: 380px; border-color: #22c55e;">
+                                            <div class="mock-header">Azure Portal > Resource Group: DCO550-LAB</div>
+                                            <div class="mock-content" style="padding: 20px;">
+                                                <div style="color: #94a3b8; border-bottom: 1px solid #334155; padding-bottom: 5px; margin-bottom: 10px;">
+                                                    Resources
+                                                </div>
+                                                <div style="display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
+                                                    <div style="display: flex; align-items: center; gap: 10px; background: #0f172a; padding: 8px; border-radius: 4px;">
+                                                        <i class="fa-solid fa-server" style="color: #60a5fa;"></i>
+                                                        <span>Analysis-VM</span>
+                                                        <span style="color: #4ade80; margin-left: auto;">Running</span>
+                                                    </div>
+                                                    <div style="display: flex; align-items: center; gap: 10px; background: #0f172a; padding: 8px; border-radius: 4px;">
+                                                        <i class="fa-solid fa-server" style="color: #ef4444;"></i>
+                                                        <span>Malware-VM</span>
+                                                        <span style="color: #4ade80; margin-left: auto;">Running</span>
+                                                    </div>
+                                                    <div style="display: flex; align-items: center; gap: 10px; background: #0f172a; padding: 8px; border-radius: 4px;">
+                                                        <i class="fa-solid fa-network-wired" style="color: #94a3b8;"></i>
+                                                        <span>DCO550-VNet</span>
+                                                        <span style="color: #94a3b8; margin-left: auto;">-</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                 </div>
             </div>
         </div>

